@@ -10,7 +10,7 @@ public class HelloController {
 	@GetMapping("/hello")
 	public String hello(Model model) {
 		System.out.println("printing ============= helloooooo heeeelllloooo");
-		model.addAttribute("name", "John Doe");
+		model.addAttribute("name", "John Doe all");
 
 		return "welcome";
 	}
