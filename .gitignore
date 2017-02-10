@@ -1,0 +1,15 @@
+.svn/*
+.apt_generated/*
+.classpath
+.mymetadata
+.project
+.settings/*
+target/*
+./myeclipse
+release.properties
+.factorypath
+src/main/java/com/stpl/loyalty/common/Solution.java
+/target/
+.tern-project
+.tern-project/*
+
