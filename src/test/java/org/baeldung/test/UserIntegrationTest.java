@@ -1,13 +1,13 @@
 package org.baeldung.test;
 
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.dao.VerificationTokenRepository;
-import org.baeldung.persistence.model.User;
-import org.baeldung.persistence.model.VerificationToken;
-import org.baeldung.spring.ServiceConfig;
+import org.app.persistence.dao.UserRepository;
+import org.app.persistence.dao.VerificationTokenRepository;
+import org.app.persistence.model.User;
+import org.app.persistence.model.VerificationToken;
+import org.app.spring.ServiceConfig;
+import org.app.validation.EmailExistsException;
 import org.baeldung.spring.TestDbConfig;
 import org.baeldung.spring.TestIntegrationConfig;
-import org.baeldung.validation.EmailExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

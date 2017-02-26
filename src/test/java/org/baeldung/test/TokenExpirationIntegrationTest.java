@@ -1,12 +1,12 @@
 package org.baeldung.test;
 
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.dao.VerificationTokenRepository;
-import org.baeldung.persistence.model.User;
-import org.baeldung.persistence.model.VerificationToken;
+import org.app.persistence.dao.UserRepository;
+import org.app.persistence.dao.VerificationTokenRepository;
+import org.app.persistence.model.User;
+import org.app.persistence.model.VerificationToken;
+import org.app.task.TokensPurgeTask;
 import org.baeldung.spring.TestDbConfig;
 import org.baeldung.spring.TestTaskConfig;
-import org.baeldung.task.TokensPurgeTask;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

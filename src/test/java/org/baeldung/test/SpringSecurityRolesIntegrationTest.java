@@ -6,12 +6,12 @@ import static org.junit.Assert.assertNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.baeldung.persistence.dao.PrivilegeRepository;
-import org.baeldung.persistence.dao.RoleRepository;
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.model.Privilege;
-import org.baeldung.persistence.model.Role;
-import org.baeldung.persistence.model.User;
+import org.app.persistence.dao.PrivilegeRepository;
+import org.app.persistence.dao.RoleRepository;
+import org.app.persistence.dao.UserRepository;
+import org.app.persistence.model.Privilege;
+import org.app.persistence.model.Role;
+import org.app.persistence.model.User;
 import org.baeldung.spring.TestDbConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;

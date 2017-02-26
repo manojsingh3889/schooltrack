@@ -9,9 +9,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.baeldung.Application;
-import org.baeldung.persistence.dao.UserRepository;
-import org.baeldung.persistence.model.User;
+import org.app.Application;
+import org.app.persistence.dao.UserRepository;
+import org.app.persistence.model.User;
 import org.baeldung.spring.TestDbConfig;
 import org.baeldung.spring.TestIntegrationConfig;
 import org.hamcrest.core.IsNot;
