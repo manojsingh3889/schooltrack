@@ -15,15 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dao.CustomerDAO;
 import com.app.model.Customer;
+import com.app.model.LoginBean;
+import com.app.um.LoginService;
 
 @RestController
 public class CustomerRestController {
 
-	
+
 	@Autowired
 	private CustomerDAO customerDAO;
-
 	
+	@Autowired
+	private LoginService loginservice;
+
+
 	@GetMapping("/customers")
 	public List getCustomers() {
 		return customerDAO.list();
@@ -42,9 +47,7 @@ public class CustomerRestController {
 
 	@PostMapping(value = "/customers")
 	public ResponseEntity createCustomer(@RequestBody Customer customer) {
-
 		customerDAO.create(customer);
-
 		return new ResponseEntity(customer, HttpStatus.OK);
 	}
 
@@ -70,5 +73,11 @@ public class CustomerRestController {
 
 		return new ResponseEntity(customer, HttpStatus.OK);
 	}
+	
+	@PostMapping(value = "/login")
+	public ResponseEntity login(@RequestBody LoginBean customer) {
+		return new ResponseEntity(loginservice.authenticateUser(customer.getUsername(), customer.getPassword()), HttpStatus.OK);
+	}
+	
 
 }
