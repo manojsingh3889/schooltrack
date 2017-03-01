@@ -25,8 +25,7 @@ public class CustomerRestController {
 	@Autowired
 	private CustomerDAO customerDAO;
 	
-	@Autowired
-	private LoginService loginservice;
+	
 
 
 	@GetMapping("/customers")
@@ -73,11 +72,7 @@ public class CustomerRestController {
 
 		return new ResponseEntity(customer, HttpStatus.OK);
 	}
-	
-	@PostMapping(value = "/login")
-	public ResponseEntity login(@RequestBody LoginBean customer) {
-		return new ResponseEntity(loginservice.authenticateUser(customer.getUsername(), customer.getPassword()), HttpStatus.OK);
-	}
+
 	
 
 }

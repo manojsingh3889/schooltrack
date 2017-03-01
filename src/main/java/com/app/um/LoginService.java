@@ -2,6 +2,8 @@ package com.app.um;
 
 import org.springframework.stereotype.Component;
 
+import com.app.model.RegisterBean;
+
 @Component
 public class LoginService {
 	public String authenticateUser(String username,String password){
@@ -10,5 +12,14 @@ public class LoginService {
 		}else{
 			return "bhai tu farzi h , a kabhi haweli pe";
 		}
+	}
+	
+	public String registerUser(RegisterBean registerBean){
+		if(registerBean != null){
+			return "success";
+		}else{
+			return "fail";
+		}
+	
 	}
 }
