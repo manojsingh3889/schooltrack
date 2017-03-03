@@ -9,7 +9,7 @@
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
 		<property name="connection.url">
-			jdbc:mysql://192.168.132.58:3306/stdummy
+			jdbc:mysql://localhost:3306/stdummy
 		</property>
 		<!-- <property name="hibernate.cache.provider_class">
 			org.hibernate.cache.EhCacheProvider
@@ -22,6 +22,7 @@
 		<property name="hibernate.connection.autocommit">
 			false
 		</property>
+		<property name=""></property>
 
 
 		<property name="hibernate.connection.pool_size">30</property>
