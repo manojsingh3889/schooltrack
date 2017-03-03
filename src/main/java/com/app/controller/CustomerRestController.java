@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dao.CustomerDAO;
+import com.app.data.dao.CustomerDAO;
 import com.app.model.Customer;
 import com.app.model.LoginBean;
 import com.app.um.LoginService;

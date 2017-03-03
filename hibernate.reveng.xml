@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="User_info" catalog="stdummy" class="UserInfo"></table>
+	<table name="User_login" catalog="stdummy" class="UserLogin"></table>
+	<table name="priviledge_role" catalog="stdummy"
+		class="PriviledgeRoleMapping">
+	</table>
+	<table name="priviledge" catalog="stdummy" class="Priviledge"></table>
+	<table name="role_user" catalog="stdummy" class="RoleUserMapping"></table>
+	<table name="role" catalog="stdummy" class="Role"></table>
+</hibernate-reverse-engineering>

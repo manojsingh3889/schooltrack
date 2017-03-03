@@ -1,25 +1,20 @@
 package com.app.um;
 
-import org.springframework.stereotype.Component;
+import com.app.data.beans.UserLogin;
+import com.app.data.dao.UserLoginDAO;
 
-import com.app.model.RegisterBean;
 
-@Component
 public class LoginService {
-	public String authenticateUser(String username,String password){
-		if("testuser".equals(username) && "testpassword".equals(password)){
-			return "ha bhai tu he apna bhai";
-		}else{
-			return "bhai tu farzi h , a kabhi haweli pe";
-		}
+
+	public UserLogin getUserLoginObject(String email,String password) {
+		UserLoginDAO userLoginDAO = new UserLoginDAO();
+		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
+		String passwordSalt = password;
+		String passwordHash = password;
+		if(username.equals(userLogin.getEmail()) && passwordSalt.equals(userLogin.getPasswordsalt())
+				&& passwordHash.equals(userLogin.getPasswordhash())){
+			return userLogin;
+		}else return null;
 	}
-	
-	public String registerUser(RegisterBean registerBean){
-		if(registerBean != null){
-			return "success";
-		}else{
-			return "fail";
-		}
-	
-	}
+
 }
