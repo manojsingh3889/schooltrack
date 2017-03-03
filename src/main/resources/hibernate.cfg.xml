@@ -53,10 +53,10 @@
 		</property>
 
 
-		<mapping class="UserLogin" />
-		<mapping class="UserInfo" />
-		<mapping class="Role" />
-		<mapping class="Priviledge" />
+		<mapping class="com.app.data.beans.UserLogin" />
+		<mapping class="com.app.data.beans.UserInfo" />
+		<mapping class="com.app.data.beans.Role" />
+		<mapping class="com.app.data.beans.Priviledge" />
 	</session-factory>
 
 </hibernate-configuration>
