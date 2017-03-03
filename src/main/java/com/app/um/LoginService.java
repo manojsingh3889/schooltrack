@@ -2,19 +2,25 @@ package com.app.um;
 
 import com.app.data.beans.UserLogin;
 import com.app.data.dao.UserLoginDAO;
+import com.app.utility.passwordUtility;
 
 
 public class LoginService {
 
+	//check username and password correct and then return userLogin Object
 	public UserLogin getUserLoginObject(String email,String password) {
 		UserLoginDAO userLoginDAO = new UserLoginDAO();
 		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
-		String passwordSalt = password;
-		String passwordHash = password;
-		if(username.equals(userLogin.getEmail()) && passwordSalt.equals(userLogin.getPasswordsalt())
-				&& passwordHash.equals(userLogin.getPasswordhash())){
-			return userLogin;
-		}else return null;
+		if(userLogin!=null){
+			String passwordSalt = userLogin.getPasswordsalt();
+			String passwordHash = userLogin.getPasswordhash();
+			password = passwordUtility.generateMD5(password+passwordSalt);
+			if(password.equals(passwordHash)){
+				return userLogin;
+			}else return null;
+		}else{
+			return null;
+		}
 	}
 
 }
