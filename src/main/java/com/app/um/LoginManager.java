@@ -27,9 +27,9 @@ public class LoginManager {
 	public String registerUser(RegisterBean registerBean){
 		if(registerBean!=null){
 			LoginService loginService = new LoginService();
-			UserInfo userInfo = loginService.registerUser(registerBean);
-			if(userInfo!=null)
-				return userInfo.toString();
+			UserLogin userLogin = loginService.registerUser(registerBean);
+			if(userLogin!=null)
+				return userLogin.toString();
 			else
 				return "error";
 		}else{

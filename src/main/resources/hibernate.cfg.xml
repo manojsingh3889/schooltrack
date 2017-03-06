@@ -9,7 +9,7 @@
 		<property name="connection.username">root</property>
 		<property name="connection.password">root</property>
 		<property name="connection.url">
-			jdbc:mysql://localhost:3306/stdummy
+			jdbc:mysql://localhost:3306/schooltrack
 		</property>
 		<!-- <property name="hibernate.cache.provider_class">
 			org.hibernate.cache.EhCacheProvider
@@ -52,10 +52,11 @@
 			org.hibernate.connection.C3P0ConnectionProvider
 		</property>
 
-		<mapping class="com.app.data.beans.Role" />
-		<mapping class="com.app.data.beans.Priviledge" />
+		<!-- <mapping class="com.app.data.beans.Role" />
+		<mapping class="com.app.data.beans.Priviledge" />-->
+		
+		<mapping class="com.app.data.beans.UserInfo" /> 
 		<mapping class="com.app.data.beans.UserLogin" />
-		<mapping class="com.app.data.beans.UserInfo" />
 		
 	</session-factory>
 

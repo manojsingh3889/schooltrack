@@ -27,7 +27,7 @@ public class LoginService {
 		}
 	}
 
-	public UserInfo registerUser(RegisterBean registerBean){
+	public UserLogin registerUser(RegisterBean registerBean){
 		String email = registerBean.getEmail();
 		UserLoginDAO userLoginDAO = new UserLoginDAO();
 		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
@@ -40,10 +40,9 @@ public class LoginService {
 			String passwordSalt = passwordUtility.generatePasswordSalt();
 			String passwordHash = passwordUtility.generateMD5(password+passwordSalt);
 			userLogin = new UserLogin(email, passwordHash, passwordSalt);
-			UserInfo userInfo = new UserInfo(firstname, lastname, userLogin);
-			UserInfoDAO userInfoDAO = new UserInfoDAO();
-			userInfoDAO.save(userInfo);
-			return userInfo;
+			//userLogin.setUserInfo(new UserInfo(firstname,lastname));
+			userLoginDAO.save(userLogin);
+			return userLogin;
 		}else{
 			return null;
 		}
