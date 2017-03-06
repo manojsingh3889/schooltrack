@@ -2,6 +2,8 @@ package com.app.utility;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.UUID;
 
 public class passwordUtility {
 	public static String generateMD5(String passwordToHash){
@@ -24,4 +26,28 @@ public class passwordUtility {
 		}
 		return generatedPassword;
 		}
+
+	public static String generatePasswordSalt() {
+		// TODO Auto-generated method stub
+		SecureRandom random = new SecureRandom();
+	    byte bytes[] = new byte[20];
+	    random.nextBytes(bytes);
+	    byte seed[] = random.generateSeed(20);
+	    String z="";
+	    for(byte ab :seed){
+			z = z+ab;
+		}
+	    
+		String x = String.valueOf(System.nanoTime());
+		String y = UUID.randomUUID().toString();
+		System.out.println(x+" "+y+" "+z);
+		String result = generateMD5(x+y+z);
+		return result;
+	}
+	
+	
+	public static void main(String[] args) {
+		generatePasswordSalt();
+	}
+	
 	}

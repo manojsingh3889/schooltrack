@@ -1,8 +1,9 @@
 package com.app.data.dao;
 // default package
 
-import com.app.config.HibernateSessionFactory;
 import org.hibernate.Session;
+
+import com.app.config.HibernateSessionFactory;
 
 
 /**

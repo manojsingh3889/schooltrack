@@ -1,11 +1,12 @@
 package com.app.data.dao;
 // default package
 
+import static org.hibernate.criterion.Example.create;
+
 import java.util.List;
-import java.util.Set;
+
 import org.hibernate.LockMode;
 import org.hibernate.Query;
-import static org.hibernate.criterion.Example.create;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

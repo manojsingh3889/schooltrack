@@ -1,7 +1,11 @@
 package com.app.um;
 
+import com.app.data.beans.Role;
+import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
+import com.app.data.dao.UserInfoDAO;
 import com.app.data.dao.UserLoginDAO;
+import com.app.model.RegisterBean;
 import com.app.utility.passwordUtility;
 
 
@@ -23,4 +27,34 @@ public class LoginService {
 		}
 	}
 
+	public UserInfo registerUser(RegisterBean registerBean){
+		String email = registerBean.getEmail();
+		UserLoginDAO userLoginDAO = new UserLoginDAO();
+		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
+		if(userLogin==null){
+		
+			String password = registerBean.getPassword();
+			String firstname = registerBean.getFirstname();
+			String lastname = registerBean.getLastname();
+			//Role role = registerBean.getRole();
+			String passwordSalt = passwordUtility.generatePasswordSalt();
+			String passwordHash = passwordUtility.generateMD5(password+passwordSalt);
+			userLogin = new UserLogin(email, passwordHash, passwordSalt);
+			UserInfo userInfo = new UserInfo(firstname, lastname, userLogin);
+			UserInfoDAO userInfoDAO = new UserInfoDAO();
+			userInfoDAO.save(userInfo);
+			return userInfo;
+		}else{
+			return null;
+		}
+	}
+
+	
+	/*public static void main(String[] args) {
+		LoginService loginService = new LoginService();
+		String password = "arpitporwal";
+		password = passwordUtility.generateMD5(password);
+		loginService.registerUser(password);
+	}*/
+	
 }

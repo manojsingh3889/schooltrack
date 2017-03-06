@@ -52,11 +52,11 @@
 			org.hibernate.connection.C3P0ConnectionProvider
 		</property>
 
-
-		<mapping class="com.app.data.beans.UserLogin" />
-		<mapping class="com.app.data.beans.UserInfo" />
 		<mapping class="com.app.data.beans.Role" />
 		<mapping class="com.app.data.beans.Priviledge" />
+		<mapping class="com.app.data.beans.UserLogin" />
+		<mapping class="com.app.data.beans.UserInfo" />
+		
 	</session-factory>
 
 </hibernate-configuration>

@@ -1,11 +1,7 @@
 package com.app.um;
 
-import java.util.Set;
-
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.handler.UserRoleAuthorizationInterceptor;
 
-import com.app.data.beans.Role;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
 import com.app.model.RegisterBean;
@@ -22,16 +18,20 @@ public class LoginManager {
 			}else{
 				return "error";
 			}
-			return "success";
+			return userLogin.toString();
 		}else{
 			return "error";
 		} 
 	}
 	
-	public String registerUser(String email, String password, UserInfo userInfo){
-		if(userInfo != null && email!=null && password!=null){
-			
-			return "success";
+	public String registerUser(RegisterBean registerBean){
+		if(registerBean!=null){
+			LoginService loginService = new LoginService();
+			UserInfo userInfo = loginService.registerUser(registerBean);
+			if(userInfo!=null)
+				return userInfo.toString();
+			else
+				return "error";
 		}else{
 			return "error";
 		}

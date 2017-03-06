@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.model.LoginBean;
 import com.app.model.RegisterBean;
 import com.app.um.LoginManager;
-import com.app.um.LoginService;
 
 
 @RestController
@@ -19,15 +18,15 @@ import com.app.um.LoginService;
 public class UserMgmtController {
 
 	@Autowired
-	private LoginManager loginManager;
+	private LoginManager loginmanager;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public ResponseEntity login(@RequestBody LoginBean bean) {
-		return new ResponseEntity(loginManager.authenticateUser(bean.getEmail(), bean.getPassword()),HttpStatus.OK);
+		return new ResponseEntity(loginmanager.authenticateUser(bean.getEmail(), bean.getPassword()), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/register")
 	public ResponseEntity register(@RequestBody RegisterBean bean){
-		return new ResponseEntity("under construction", HttpStatus.OK);
+		return new ResponseEntity(loginmanager.registerUser(bean), HttpStatus.OK);
 	}
 }

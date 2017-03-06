@@ -1,26 +1,23 @@
 package com.app.data.beans;
 // default package
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 
 /**
  * UserLogin entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name="User_login"
-    ,catalog="stdummy"
-, uniqueConstraints = @UniqueConstraint(columnNames="email")
-)
+@Table(name="User_login")
 
 public class UserLogin  implements java.io.Serializable {
 
@@ -42,8 +39,7 @@ public class UserLogin  implements java.io.Serializable {
 
     
     /** full constructor */
-    public UserLogin(UserInfo userInfo, String email, String passwordhash, String passwordsalt) {
-        this.userInfo = userInfo;
+    public UserLogin(String email, String passwordhash, String passwordsalt) {
         this.email = email;
         this.passwordhash = passwordhash;
         this.passwordsalt = passwordsalt;
@@ -52,9 +48,7 @@ public class UserLogin  implements java.io.Serializable {
    
     // Property accessors
     @Id @GeneratedValue(strategy=IDENTITY)
-    
     @Column(name="id", unique=true, nullable=false)
-
     public Integer getId() {
         return this.id;
     }
@@ -62,9 +56,9 @@ public class UserLogin  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-	@ManyToOne(fetch=FetchType.LAZY)
-        @JoinColumn(name="userid", nullable=false)
-
+    
+	@OneToOne(fetch=FetchType.LAZY)
+        @JoinColumn(name="userinfo", nullable=false)
     public UserInfo getUserInfo() {
         return this.userInfo;
     }
@@ -74,7 +68,6 @@ public class UserLogin  implements java.io.Serializable {
     }
     
     @Column(name="email", unique=true, nullable=false, length=100)
-
     public String getEmail() {
         return this.email;
     }
@@ -84,7 +77,6 @@ public class UserLogin  implements java.io.Serializable {
     }
     
     @Column(name="passwordhash", nullable=false)
-
     public String getPasswordhash() {
         return this.passwordhash;
     }
@@ -94,7 +86,6 @@ public class UserLogin  implements java.io.Serializable {
     }
     
     @Column(name="passwordsalt", nullable=false)
-
     public String getPasswordsalt() {
         return this.passwordsalt;
     }
@@ -110,6 +101,4 @@ public class UserLogin  implements java.io.Serializable {
 				+ email + ", passwordhash=" + passwordhash + ", passwordsalt="
 				+ passwordsalt + "]";
 	}
-   
-
 }
