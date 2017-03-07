@@ -1,24 +1,27 @@
 package com.app.um;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
-import com.app.model.RegisterBean;
 
 @Component
 public class LoginManager {
-
+	
+	@Autowired
+	LoginService loginService;
+	
 	public String authenticateUser(String email,String password){
 		if(email!=null && password!=null){
-			LoginService loginService = new LoginService();
 			UserLogin userLogin = loginService.getUserLoginObject(email,password);
 			if(userLogin!=null){
 				UserInfo userInfo = userLogin.getUserInfo();
+				return userInfo.toString();
 			}else{
 				return "error";
 			}
-			return userLogin.toString();
 		}else{
 			return "error";
 		} 
@@ -26,16 +29,14 @@ public class LoginManager {
 	
 	public String registerUser(RegisterBean registerBean){
 		if(registerBean!=null){
-			LoginService loginService = new LoginService();
 			UserLogin userLogin = loginService.registerUser(registerBean);
 			if(userLogin!=null)
-				return userLogin.toString();
+				return userLogin.getUserInfo().toString();
 			else
 				return "error";
 		}else{
 			return "error";
 		}
-	
 	}
 	
 }

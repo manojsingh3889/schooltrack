@@ -3,6 +3,7 @@ package com.app.data.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class UserInfo  implements java.io.Serializable {
 	@Column(name="lastname")
 	private String lastname;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="role_id",nullable=true)
 	private Role role;
 
@@ -76,4 +77,12 @@ public class UserInfo  implements java.io.Serializable {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	@Override
+	public String toString() {
+		return "UserInfo [userid=" + userid + ", firstname=" + firstname + ", lastname=" + lastname + ", role=" + role
+				+ "]";
+	}
+	
+	
 }

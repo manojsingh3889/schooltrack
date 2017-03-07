@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.api.requestbean.Customer;
 import com.app.data.dao.CustomerDAO;
-import com.app.model.Customer;
 
 @RestController
 public class CustomerRestController {
@@ -22,9 +22,6 @@ public class CustomerRestController {
 
 	@Autowired
 	private CustomerDAO customerDAO;
-	
-	
-
 
 	@GetMapping("/customers")
 	public List getCustomers() {

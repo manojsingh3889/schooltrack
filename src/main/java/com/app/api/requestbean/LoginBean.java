@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.api.requestbean;
 
 public class LoginBean {
 	private String email;

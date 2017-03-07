@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.app.model.Customer;
+import com.app.api.requestbean.Customer;
 
 @Component
 public class CustomerDAO {

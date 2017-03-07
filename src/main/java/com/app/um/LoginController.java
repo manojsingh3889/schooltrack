@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.um;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,14 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.model.LoginBean;
-import com.app.model.RegisterBean;
-import com.app.um.LoginManager;
+import com.app.api.requestbean.LoginBean;
+import com.app.api.requestbean.RegisterBean;
 
 
 @RestController
 @RequestMapping("/um")
-public class UserMgmtController {
+public class LoginController{
 
 	@Autowired
 	private LoginManager loginmanager;

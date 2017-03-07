@@ -19,17 +19,24 @@ public class Role  implements java.io.Serializable {
 	@Column(name="role_id")
 	private Integer roleId;
 	
-	@Column(name="name")
-	private String name;
+	@Column(name="code", nullable=false)
+	private String codeName;
 
+	@Column(name="display_name")
+	private String displayName;
+	
+	@Column(name="description")
+	private String description;
+
+	
+	
 	public Role() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Role(String name) {
-		super();
-		this.name = name;
+	public Role(String codeName, String displayName, String description) {
+		this.codeName = codeName;
+		this.displayName = displayName;
+		this.description = description;
 	}
 
 	public Integer getRoleId() {
@@ -40,12 +47,27 @@ public class Role  implements java.io.Serializable {
 		this.roleId = roleId;
 	}
 
-	public String getName() {
-		return name;
+	public String getCodeName() {
+		return codeName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
 	}
 
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }

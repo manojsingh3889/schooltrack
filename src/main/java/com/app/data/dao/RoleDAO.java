@@ -9,6 +9,7 @@ import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.app.data.beans.Role;
 
@@ -20,6 +21,8 @@ import com.app.data.beans.Role;
 	 * @see .Role
   * @author MyEclipse Persistence Tools 
  */
+
+@Repository
 public class RoleDAO extends BaseHibernateDAO  {
 	     private static final Logger log = LoggerFactory.getLogger(RoleDAO.class);
 		//property constants
@@ -54,7 +57,7 @@ public class RoleDAO extends BaseHibernateDAO  {
         log.debug("getting Role instance with id: " + id);
         try {
             Role instance = (Role) getSession()
-                    .get("Role", id);
+                    .get(Role.class, id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -67,7 +70,7 @@ public class RoleDAO extends BaseHibernateDAO  {
         log.debug("finding Role instance by example");
         try {
             List<Role> results = (List<Role>) getSession()
-                    .createCriteria("Role")
+                    .createCriteria(Role.class)
                     .add( create(instance) )
             .list();
             log.debug("find by example successful, result size: " + results.size());

@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.api.requestbean;
 
 import java.util.Date;
 

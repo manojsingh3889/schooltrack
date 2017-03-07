@@ -3,23 +3,18 @@ package com.app.data.dao;
 
 import static org.hibernate.criterion.Example.create;
 
+
 import java.util.List;
 
 import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.app.data.beans.Priviledge;
 
-/**
- 	* A data access object (DAO) providing persistence and search support for Priviledge entities.
- 			* Transaction control of the save(), update() and delete() operations 
-		can directly support Spring container-managed transactions or they can be augmented	to handle user-managed Spring transactions. 
-		Each of these methods provides additional information for how to configure it for the desired type of transaction control. 	
-	 * @see .Priviledge
-  * @author MyEclipse Persistence Tools 
- */
+@Repository
 public class PriviledgeDAO extends BaseHibernateDAO  {
 	     private static final Logger log = LoggerFactory.getLogger(PriviledgeDAO.class);
 		//property constants
@@ -53,7 +48,7 @@ public class PriviledgeDAO extends BaseHibernateDAO  {
         log.debug("getting Priviledge instance with id: " + id);
         try {
             Priviledge instance = (Priviledge) getSession()
-                    .get("Priviledge", id);
+                    .get(Priviledge.class, id);
             return instance;
         } catch (RuntimeException re) {
             log.error("get failed", re);
@@ -66,7 +61,7 @@ public class PriviledgeDAO extends BaseHibernateDAO  {
         log.debug("finding Priviledge instance by example");
         try {
             List<Priviledge> results = (List<Priviledge>) getSession()
-                    .createCriteria("Priviledge")
+                    .createCriteria(Priviledge.class)
                     .add( create(instance) )
             .list();
             log.debug("find by example successful, result size: " + results.size());

@@ -10,6 +10,7 @@ import org.hibernate.LockMode;
 import org.hibernate.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.app.data.beans.UserLogin;
 
@@ -21,6 +22,7 @@ import com.app.data.beans.UserLogin;
  * @see .UserLogin
  * @author MyEclipse Persistence Tools 
  */
+@Repository
 public class UserLoginDAO extends BaseHibernateDAO  {
 	private static final Logger log = LoggerFactory.getLogger(UserLoginDAO.class);
 	//property constants
@@ -57,7 +59,7 @@ public class UserLoginDAO extends BaseHibernateDAO  {
 		log.debug("getting UserLogin instance with id: " + id);
 		try {
 			UserLogin instance = (UserLogin) getSession()
-					.get("UserLogin", id);
+					.get(UserLogin.class, id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
