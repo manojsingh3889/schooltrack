@@ -30,6 +30,7 @@ public class LoginService {
 	public UserLogin registerUser(RegisterBean registerBean){
 		String email = registerBean.getEmail();
 		UserLoginDAO userLoginDAO = new UserLoginDAO();
+		UserInfoDAO userInfoDAO = new UserInfoDAO();
 		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
 		if(userLogin==null){
 		
@@ -40,7 +41,9 @@ public class LoginService {
 			String passwordSalt = passwordUtility.generatePasswordSalt();
 			String passwordHash = passwordUtility.generateMD5(password+passwordSalt);
 			userLogin = new UserLogin(email, passwordHash, passwordSalt);
-			//userLogin.setUserInfo(new UserInfo(firstname,lastname));
+			UserInfo userInfo = new UserInfo(firstname,lastname);
+			userInfoDAO.save(userInfo);
+			userLogin.setUserInfo(userInfo);
 			userLoginDAO.save(userLogin);
 			return userLogin;
 		}else{

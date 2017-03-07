@@ -1,32 +1,27 @@
 package com.app.data.beans;
-// default package
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 
-/**
- * UserLogin entity. @author MyEclipse Persistence Tools
- */
 @Entity
 @Table(name="User_login")
-
 public class UserLogin  implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="userid")
-	private Integer userid;
+	@Column(name="login_id")
+	private Integer loginId;
 
 	@Column(name="email")
 	private String email;
@@ -37,10 +32,11 @@ public class UserLogin  implements java.io.Serializable {
 	@Column(name="passwordsalt")
 	private String passwordsalt;
 
-	@OneToOne(mappedBy="userLogin")
-	@Cascade(value=CascadeType.ALL)
-	private UserInfo userInfo;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id")
+	private UserInfo userInfo;
+
 	public UserLogin(String email, String passwordhash, String passwordsalt) {
 		this.email = email;
 		this.passwordhash = passwordhash;
@@ -50,12 +46,13 @@ public class UserLogin  implements java.io.Serializable {
 	public UserLogin() {
 	}
 
-	public Integer getUserid() {
-		return userid;
+
+	public Integer getLoginId() {
+		return loginId;
 	}
 
-	public void setUserid(Integer userid) {
-		this.userid = userid;
+	public void setId(Integer loginId) {
+		this.loginId = loginId;
 	}
 
 	public String getEmail() {
@@ -92,7 +89,7 @@ public class UserLogin  implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "UserLogin [userid=" + userid + ", email=" + email + ", passwordhash=" + passwordhash + ", passwordsalt="
+		return "UserLogin [loginId=" + loginId + ", email=" + email + ", passwordhash=" + passwordhash + ", passwordsalt="
 				+ passwordsalt + ", userInfo=" + userInfo + "]";
 	}
 }
