@@ -30,6 +30,12 @@ public class HibernateSessionFactory {
 	static {
     	try {
 			configuration.configure(configFile);
+			if(System.getenv("dbconnecturl")==null){
+				System.err.println(" Suggestion :: for Creating SessionFactory you can set environment "
+						+ "variable dbconnecturl to change db url");
+			}else{
+				configuration.setProperty("hibernate.connection.url",System.getenv("dbconnecturl"));
+			}
 			sessionFactory = configuration.buildSessionFactory();
 		} catch (Exception e) {
 			System.err.println("%%%% Error Creating SessionFactory %%%%");

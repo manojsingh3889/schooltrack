@@ -6,7 +6,11 @@
 		
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/practise</property>
+		<!-- this property is commented to keep db url decoupled.. set system variable with name "dbconnecturl"
+		for e.g. on linux shell " export dbconnecturl=jdbc:mysql://localhost:3306/practise"
+		in wildfly/jboss create environment variable in there settings key:dbconnecturl ,value:jdbc:mysql://localhost:3306/practise -->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/practise</property> -->
+		
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
 		<!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
