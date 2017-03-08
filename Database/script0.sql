@@ -51,12 +51,15 @@ CREATE TABLE `priviledge` (
   `code` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`priviledge_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`priviledge_id`),
+  UNIQUE KEY `unique_code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `priviledge` */
 
-insert  into `priviledge`(`priviledge_id`,`code`,`display_name`,`description`) values (1,'addPriviledge','Add Priviledge',NULL),(2,'addStudent','add student','add student');
+insert  into `priviledge`(`priviledge_id`,`code`,`display_name`,`description`) values 
+(1,'addPriviledge','Add Priviledge',NULL),
+(2,'addStudent','add student','add student');
 
 /*Table structure for table `role` */
 
@@ -67,12 +70,16 @@ CREATE TABLE `role` (
   `code` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`role_id`),
+  UNIQUE KEY `unique_code` (`code`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `role` */
 
-insert  into `role`(`role_id`,`code`,`display_name`,`description`) values (1,'system','System User','System user for support and backened work.'),(2,'admin','school admin','school admin');
+insert  into `role`(`role_id`,`code`,`display_name`,`description`) values 
+(1,'system','System User','System user for support and backened work.'),
+(2,'admin','school admin','school admin'),
+(7,'test','t','ttttt');
 
 /*Table structure for table `role_priviledge` */
 
@@ -82,12 +89,14 @@ CREATE TABLE `role_priviledge` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role_id` varchar(255) NOT NULL,
   `priviledge_id` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique` (`role_id`,`priviledge_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `role_priviledge` */
 
-insert  into `role_priviledge`(`id`,`role_id`,`priviledge_id`) values (1,'1','1');
+insert  into `role_priviledge`(`id`,`role_id`,`priviledge_id`) values 
+(1,'1','1');
 
 /*Table structure for table `route_info` */
 
@@ -178,16 +187,17 @@ CREATE TABLE `user_info` (
   `lastname` varchar(255) NOT NULL,
   `role_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_info` */
 
-insert  into `user_info`(`user_id`,`firstname`,`lastname`,`role_id`) values (1,'manoj','singh',NULL);
+insert  into `user_info`(`user_id`,`firstname`,`lastname`,`role_id`) values 
+(1,'manoj','singh',NULL),
+(2,'test','s',NULL);
 
 /*Table structure for table `user_login` */
 
 DROP TABLE IF EXISTS `user_login`;
-
 CREATE TABLE `user_login` (
   `login_id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(100) NOT NULL,
@@ -196,11 +206,15 @@ CREATE TABLE `user_login` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`login_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_login` */
 
-insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values (1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1);
+insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values 
+(1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1),
+(2,'test@s.com','61d5217883277b96b5d105aa5f8a4b7b','9fca2264c9a1e7b3e9f135185444b4ce',2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
