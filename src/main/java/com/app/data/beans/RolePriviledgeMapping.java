@@ -8,20 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="role_priviledge")
+@Table(name="role_priviledge", 
+uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id","priviledge_id"})})
 public class RolePriviledgeMapping {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
-	
+
 	@ManyToOne
 	@JoinColumn(name="role_id")
 	private Role role;
-	
+
 	@ManyToOne
 	@JoinColumn(name="priviledge_id")
 	private Priviledge priviledge;
@@ -57,5 +59,5 @@ public class RolePriviledgeMapping {
 	public void setPriviledge(Priviledge priviledge) {
 		this.priviledge = priviledge;
 	}
-	
+
 }

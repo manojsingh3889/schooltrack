@@ -20,7 +20,7 @@ public class Priviledge  implements java.io.Serializable {
 	@Column(name="priviledge_id", unique=true, nullable=false)
 	private Integer priviledgeId;
 
-	@Column(name="code", nullable=false)
+	@Column(name="code", nullable=false, unique=true)
 	private String codeName;
 	
 	@Column(name="display_name")

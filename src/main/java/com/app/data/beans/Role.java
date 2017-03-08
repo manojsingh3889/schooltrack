@@ -19,7 +19,7 @@ public class Role  implements java.io.Serializable {
 	@Column(name="role_id")
 	private Integer roleId;
 	
-	@Column(name="code", nullable=false)
+	@Column(name="code", nullable=false, unique=true)
 	private String codeName;
 
 	@Column(name="display_name")

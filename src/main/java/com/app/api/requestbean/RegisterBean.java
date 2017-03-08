@@ -6,7 +6,6 @@ import com.app.data.beans.Role;
 
 public class RegisterBean {
 	private Long id;
-	private String username;
 	private String password;
 	private String firstname;
 	private String lastname;
@@ -19,12 +18,11 @@ public class RegisterBean {
 		super();
 	}
 
-	public RegisterBean(Long id, String username, String password,
+	public RegisterBean(Long id, String password,
 			String firstname, String lastname, String email, String mobile,
 			Date dateOfBirth, Role role) {
 		super();
 		this.id = id;
-		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -35,12 +33,11 @@ public class RegisterBean {
 	}
 	
 	
-	public RegisterBean(Long id, String username, String password,
+	public RegisterBean(Long id, String password,
 			String firstname, String lastname, String email, String mobile,
 			Date dateOfBirth) {
 		super();
 		this.id = id;
-		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -49,10 +46,9 @@ public class RegisterBean {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
-	public RegisterBean(String username, String password,
+	public RegisterBean(String password,
 			String firstname, String lastname, String email, String mobile,
 			Date dateOfBirth) {
-		this.username = username;
 		this.password = password;
 		this.firstname = firstname;
 		this.lastname = lastname;
@@ -69,12 +65,6 @@ public class RegisterBean {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	public String getPassword() {
 		return password;

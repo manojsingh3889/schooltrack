@@ -20,7 +20,7 @@ import com.app.config.HibernateSessionFactory;
  */
 public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(BaseHibernateDAO.class);
+	protected static final Logger log = LoggerFactory.getLogger(BaseHibernateDAO.class);
 	
 	private final Class<T> type;
 //	protected abstract Class getBeanType(); 
@@ -33,7 +33,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public void save(T transientInstance) {
-		log.debug("saving "+type+" instance");
+		log.debug("saving "+type.getSimpleName()+" instance");
 		try {
 			getSession().save(transientInstance);
 			log.debug("save successful");
@@ -44,7 +44,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public void delete(T persistentInstance) {
-		log.debug("deleting "+type+" instance");
+		log.debug("deleting "+type.getSimpleName()+" instance");
 		try {
 			getSession().delete(persistentInstance);
 			log.debug("delete successful");
@@ -55,7 +55,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public T findById( Integer id) {
-		log.debug("getting "+type+" instance with id: " + id);
+		log.debug("getting "+type.getSimpleName()+" instance with id: " + id);
 		try {
 			T instance = (T) getSession()
 					.get(type, id);
@@ -68,7 +68,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 
 
 	public List<T> findByExample(T instance) {
-		log.debug("finding "+type+" instance by example");
+		log.debug("finding "+type.getSimpleName()+" instance by example");
 		try {
 			List<T> results = (List<T>) getSession()
 					.createCriteria(type)
@@ -83,10 +83,10 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}    
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding "+type+" instance with property: " + propertyName
+		log.debug("finding "+type.getSimpleName()+" instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from "+type+" as model where model." 
+			String queryString = "from "+type.getSimpleName()+" as model where model." 
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
@@ -99,9 +99,10 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 
 
 	public List findAll() {
-		log.debug("finding all "+type+" instances");
+		log.debug("finding all "+type.getSimpleName()+" instances");
+		
 		try {
-			String queryString = "from "+type+"";
+			String queryString = "from "+type.getSimpleName()+"";
 			Query queryObject = getSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -111,7 +112,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public T merge(T detachedInstance) {
-		log.debug("merging "+type+" instance");
+		log.debug("merging "+type.getSimpleName()+" instance");
 		try {
 			T result = (T) getSession()
 					.merge(detachedInstance);
@@ -124,7 +125,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public void attachDirty(T instance) {
-		log.debug("attaching dirty "+type+" instance");
+		log.debug("attaching dirty "+type.getSimpleName()+" instance");
 		try {
 			getSession().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -135,7 +136,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 	public void attachClean(T instance) {
-		log.debug("attaching clean "+type+" instance");
+		log.debug("attaching clean "+type.getSimpleName()+" instance");
 		try {
 			getSession().lock(instance, LockMode.NONE);
 			log.debug("attach successful");

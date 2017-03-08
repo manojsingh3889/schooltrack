@@ -24,13 +24,13 @@ public class UserLogin  implements java.io.Serializable {
 	@Column(name="login_id")
 	private Integer loginId;
 
-	@Column(name="email")
+	@Column(name="email", nullable=false, unique = true)
 	private String email;
 
-	@Column(name="passwordhash")
+	@Column(name="passwordhash", nullable=false)
 	private String passwordhash;
 
-	@Column(name="passwordsalt")
+	@Column(name="passwordsalt", nullable=false)
 	private String passwordsalt;
 
 	
