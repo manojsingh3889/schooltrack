@@ -3,6 +3,7 @@ package com.app.um;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.Role;
 import com.app.data.beans.UserInfo;
@@ -21,12 +22,12 @@ public class LoginService {
 	UserInfoDAO userInfoDAO;
 	
 	//check username and password correct and then return userLogin Object
-	public UserLogin getUserLoginObject(String email,String password) {
-		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
+	public UserLogin getUserLoginObject(LoginBean loginBean) {
+		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(loginBean.getEmail());
 		if(userLogin!=null){
 			String passwordSalt = userLogin.getPasswordsalt();
 			String passwordHash = userLogin.getPasswordhash();
-			password = passwordUtility.generateMD5(password+passwordSalt);
+			String password = passwordUtility.generateMD5(loginBean.getPassword()+passwordSalt);
 			if(password.equals(passwordHash)){
 				return userLogin;
 			}else return null;

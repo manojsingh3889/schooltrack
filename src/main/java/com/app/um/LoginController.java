@@ -21,7 +21,7 @@ public class LoginController{
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/login")
 	public ResponseEntity login(@RequestBody LoginBean bean) {
-		return new ResponseEntity(loginmanager.authenticateUser(bean.getEmail(), bean.getPassword()), HttpStatus.OK);
+		return new ResponseEntity(loginmanager.authenticateUser(bean), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/register")
