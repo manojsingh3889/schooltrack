@@ -35,12 +35,15 @@ public class RouteInfo {
 	@JoinColumn(name="school_id")
 	private SchoolInfo school;
 	
+	@Column(name="tripstatus")
+	private String tripstatus;
+	
 	public RouteInfo() {
 	}
 
 	public RouteInfo(Integer routeid, String routenumber, Integer seatcapacity,
 			String routearea, String busplatenumber, Integer seatsleft,
-			SchoolInfo school) {
+			SchoolInfo school, String tripstatus) {
 		super();
 		this.routeid = routeid;
 		this.routenumber = routenumber;
@@ -49,6 +52,7 @@ public class RouteInfo {
 		this.busplatenumber = busplatenumber;
 		this.seatsleft = seatsleft;
 		this.school = school;
+		this.tripstatus = tripstatus;
 	}
 
 	public Integer getRouteid() {
@@ -107,14 +111,22 @@ public class RouteInfo {
 		this.school = school;
 	}
 
+	public String getTripstatus() {
+		return tripstatus;
+	}
+
+	public void setTripstatus(String tripstatus) {
+		this.tripstatus = tripstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "RouteInfo [routeid=" + routeid + ", routenumber=" + routenumber
 				+ ", seatcapacity=" + seatcapacity + ", routearea=" + routearea
 				+ ", busplatenumber=" + busplatenumber + ", seatsleft="
-				+ seatsleft + ", school=" + school + "]";
+				+ seatsleft + ", school=" + school + ", tripstatus="
+				+ tripstatus + "]";
 	}
-
 	
 	
 }
