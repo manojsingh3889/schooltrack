@@ -57,7 +57,7 @@ public class ParentController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/selectStop/{studentId}")
-	public ResponseEntity getAllInfo(@PathVariable("routeId") Integer studentId){
+	public ResponseEntity getAllInfo(@PathVariable("studentId") Integer studentId){
 		return new ResponseEntity(parentManager.getAllInfo(studentId),HttpStatus.OK);
 	}
 }
