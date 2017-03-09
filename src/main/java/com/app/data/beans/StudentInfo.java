@@ -40,7 +40,7 @@ public class StudentInfo {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="stop_id")
-	private BusstopInfo stop;
+	private StopInfo stop;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
@@ -52,7 +52,7 @@ public class StudentInfo {
 	public StudentInfo(Integer studentid, String firstname, String lastname,
 			String registrationnumber, String studentclass,
 			String studentsection, String photo, RouteInfo route,
-			BusstopInfo stop, SchoolInfo school) {
+			StopInfo stop, SchoolInfo school) {
 		super();
 		this.studentid = studentid;
 		this.firstname = firstname;
@@ -130,11 +130,11 @@ public class StudentInfo {
 		this.route = route;
 	}
 
-	public BusstopInfo getStop() {
+	public StopInfo getStop() {
 		return stop;
 	}
 
-	public void setStop(BusstopInfo stop) {
+	public void setStop(StopInfo stop) {
 		this.stop = stop;
 	}
 

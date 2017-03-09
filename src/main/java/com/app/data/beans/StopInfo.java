@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class BusstopInfo {
+public class StopInfo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,11 +21,11 @@ public class BusstopInfo {
 	@Column(name="address")
 	private String address;
 	
-	public BusstopInfo() {
+	public StopInfo() {
 		super();
 	}
 
-	public BusstopInfo(Integer stopid, String stoplattitude,
+	public StopInfo(Integer stopid, String stoplattitude,
 			String stoplongitude, String address) {
 		super();
 		this.stopid = stopid;
@@ -65,11 +65,14 @@ public class BusstopInfo {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "BusstopInfo [stopid=" + stopid + ", stoplattitude=" + stoplattitude + ", stoplongitude=" + stoplongitude + ", address=" + address
-				 + "]";
+		return "StopInfo [stopid=" + stopid + ", stoplattitude="
+				+ stoplattitude + ", stoplongitude=" + stoplongitude
+				+ ", address=" + address + "]";
 	}
+	
+	
 	
 }

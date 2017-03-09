@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.data.beans.BusstopInfo;
-import com.app.data.beans.BusstopRouteMapping;
+import com.app.data.beans.StopInfo;
+import com.app.data.beans.StopRouteMapping;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
@@ -31,10 +31,10 @@ public class ParentService {
 	BaseHibernateDAO<SchoolInfo> schoolBaseHibernateDAO;
 	
 	@Autowired
-	BaseHibernateDAO<BusstopRouteMapping> busstopRouteBaseHibernateDAO;
+	BaseHibernateDAO<StopRouteMapping> busstopRouteBaseHibernateDAO;
 	
 	@Autowired
-	BaseHibernateDAO<BusstopInfo> busstopBaseHibernateDAO;
+	BaseHibernateDAO<StopInfo> busstopBaseHibernateDAO;
 	
 	@Autowired
 	BaseHibernateDAO<RouteTracking> routeTrackingBaseHibernateDAO;
@@ -71,19 +71,19 @@ public class ParentService {
 			return null;
 	}
 	
-	public BusstopInfo getStop(Integer stopId){
-		BusstopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
+	public StopInfo getStop(Integer stopId){
+		StopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
 		if(busstopInfo!=null){
 			return busstopInfo;
 		}else
 			return null;
 	}
 	
-	public List<BusstopInfo> getStops(Integer routeId){
-		List<BusstopRouteMapping> BusstopRouteMappingList = busstopRouteBaseHibernateDAO.findByProperty("routeId", routeId);
+	public List<StopInfo> getStops(Integer routeId){
+		List<StopRouteMapping> BusstopRouteMappingList = busstopRouteBaseHibernateDAO.findByProperty("routeId", routeId);
 		if(BusstopRouteMappingList!=null){
-			List<BusstopInfo> busstopInfoList = new ArrayList<BusstopInfo>();
-			for(BusstopRouteMapping routeMapping : BusstopRouteMappingList){
+			List<StopInfo> busstopInfoList = new ArrayList<StopInfo>();
+			for(StopRouteMapping routeMapping : BusstopRouteMappingList){
 				busstopInfoList.add(routeMapping.getStop());
 			}
 			return busstopInfoList;
@@ -101,7 +101,7 @@ public class ParentService {
 	
 	public StudentInfo setStop(Integer studentId,Integer stopId){
 		StudentInfo studentInfo = studentBaseHibernateDAO.findUniqueByProperty("studentid", studentId);
-		BusstopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
+		StopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
 		if(studentInfo!=null && busstopInfo!=null){
 			studentInfo.setStop(busstopInfo);
 			return studentInfo;

@@ -9,12 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-public class BusstopRouteMapping {
+public class StopRouteMapping {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="busstop_route_id")
-	private Integer busstoprouteid;
+	@Column(name="stop_route_id")
+	private Integer stoprouteid;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="route_id")
@@ -22,25 +22,24 @@ public class BusstopRouteMapping {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="stop_id")
-	private BusstopInfo stop;
+	private StopInfo stop;
 	
-	public BusstopRouteMapping() {
+	public StopRouteMapping() {
 	}
 
-	public BusstopRouteMapping(Integer busstoprouteid, RouteInfo route,
-			BusstopInfo stop) {
+	public StopRouteMapping(Integer stoprouteid, RouteInfo route, StopInfo stop) {
 		super();
-		this.busstoprouteid = busstoprouteid;
+		this.stoprouteid = stoprouteid;
 		this.route = route;
 		this.stop = stop;
 	}
 
-	public Integer getBusstoprouteid() {
-		return busstoprouteid;
+	public Integer getStoprouteid() {
+		return stoprouteid;
 	}
 
-	public void setBusstoprouteid(Integer busstoprouteid) {
-		this.busstoprouteid = busstoprouteid;
+	public void setStoprouteid(Integer stoprouteid) {
+		this.stoprouteid = stoprouteid;
 	}
 
 	public RouteInfo getRoute() {
@@ -51,19 +50,20 @@ public class BusstopRouteMapping {
 		this.route = route;
 	}
 
-	public BusstopInfo getStop() {
+	public StopInfo getStop() {
 		return stop;
 	}
 
-	public void setStop(BusstopInfo stop) {
+	public void setStop(StopInfo stop) {
 		this.stop = stop;
 	}
 
 	@Override
 	public String toString() {
-		return "BusstopRouteMapping [busstoprouteid=" + busstoprouteid
-				+ ", route=" + route + ", stop=" + stop + "]";
+		return "StopRouteMapping [stoprouteid=" + stoprouteid + ", route="
+				+ route + ", stop=" + stop + "]";
 	}
 
+	
 	
 }

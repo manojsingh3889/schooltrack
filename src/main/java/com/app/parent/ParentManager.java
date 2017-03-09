@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.data.beans.BusstopInfo;
+import com.app.data.beans.StopInfo;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
@@ -63,9 +63,9 @@ public class ParentManager {
 			return null;	
 	}
 	
-	public BusstopInfo getStop(Integer stopId){
+	public StopInfo getStop(Integer stopId){
 		if(stopId!=null){
-			BusstopInfo busstopInfo = parentService.getStop(stopId);
+			StopInfo busstopInfo = parentService.getStop(stopId);
 			if(busstopInfo!=null){
 				return busstopInfo;
 			}else 
@@ -74,9 +74,9 @@ public class ParentManager {
 			return null;	
 	}
 	
-	public List<BusstopInfo> getStops(Integer routeId){
+	public List<StopInfo> getStops(Integer routeId){
 		if(routeId!=null){
-			List<BusstopInfo> busStopInfoList = parentService.getStops(routeId);
+			List<StopInfo> busStopInfoList = parentService.getStops(routeId);
 			if(busStopInfoList!=null){
 				return busStopInfoList;
 			}else 
@@ -113,7 +113,7 @@ public class ParentManager {
 			if(studentInfo!=null){
 				RouteInfo routeInfo = studentInfo.getRoute();
 				SchoolInfo schoolInfo = studentInfo.getSchool();
-				BusstopInfo busstopInfo = studentInfo.getStop();
+				StopInfo busstopInfo = studentInfo.getStop();
 				return studentInfo;
 			}else 
 				return null;
