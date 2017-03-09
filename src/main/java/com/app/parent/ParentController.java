@@ -56,9 +56,8 @@ public class ParentController {
 		return new ResponseEntity(parentManager.setStop(studentId,stopId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/selectStop/{studentId,stopId}")
-	public ResponseEntity saveStop(@PathVariable("routeId") Integer routeId,
-			@PathVariable("stopId") Integer stopId){
-		return new ResponseEntity(parentManager.saveStop(routeId,stopId),HttpStatus.OK);
+	@RequestMapping(method=RequestMethod.POST,value="/selectStop/{studentId}")
+	public ResponseEntity getAllInfo(@PathVariable("routeId") Integer studentId){
+		return new ResponseEntity(parentManager.getAllInfo(studentId),HttpStatus.OK);
 	}
 }
