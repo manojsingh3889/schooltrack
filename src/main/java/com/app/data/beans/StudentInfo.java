@@ -36,23 +36,23 @@ public class StudentInfo {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="route_id")
-	private Integer routeid;
+	private RouteInfo route;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="stop_id")
-	private Integer stopid;
+	private BusstopInfo stop;
 	
-	@Column(name="school_id")
-	private String schoolid;
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="school_id")
+	private SchoolInfo school;
 	
 	public StudentInfo() {
-		super();
 	}
 
 	public StudentInfo(Integer studentid, String firstname, String lastname,
 			String registrationnumber, String studentclass,
-			String studentsection, String photo, Integer routeid,
-			Integer stopid) {
+			String studentsection, String photo, RouteInfo route,
+			BusstopInfo stop, SchoolInfo school) {
 		super();
 		this.studentid = studentid;
 		this.firstname = firstname;
@@ -61,8 +61,9 @@ public class StudentInfo {
 		this.studentclass = studentclass;
 		this.studentsection = studentsection;
 		this.photo = photo;
-		this.routeid = routeid;
-		this.stopid = stopid;
+		this.route = route;
+		this.stop = stop;
+		this.school = school;
 	}
 
 	public Integer getStudentid() {
@@ -121,36 +122,38 @@ public class StudentInfo {
 		this.photo = photo;
 	}
 
-	public Integer getRouteid() {
-		return routeid;
+	public RouteInfo getRoute() {
+		return route;
 	}
 
-	public void setRouteid(Integer routeid) {
-		this.routeid = routeid;
+	public void setRoute(RouteInfo route) {
+		this.route = route;
 	}
 
-	public Integer getStopid() {
-		return stopid;
+	public BusstopInfo getStop() {
+		return stop;
 	}
 
-	public void setStopid(Integer stopid) {
-		this.stopid = stopid;
-	}
-	
-	public String getSchoolid() {
-		return schoolid;
+	public void setStop(BusstopInfo stop) {
+		this.stop = stop;
 	}
 
-	public void setSchoolid(String schoolid) {
-		this.schoolid = schoolid;
+	public SchoolInfo getSchool() {
+		return school;
+	}
+
+	public void setSchool(SchoolInfo school) {
+		this.school = school;
 	}
 
 	@Override
 	public String toString() {
-		return "StudentInfo [studentid=" + studentid + ", firstname=" + firstname + ", lastname=" + lastname + ", registrationnumber=" + registrationnumber
-				+ ", studentclass=" + studentclass + ", studentsection=" + studentsection + ", photo=" + photo + ", routeid=" + routeid 
-				+ ", stopid=" + stopid + ", schoolid=" + schoolid + "]";
+		return "StudentInfo [studentid=" + studentid + ", firstname="
+				+ firstname + ", lastname=" + lastname
+				+ ", registrationnumber=" + registrationnumber
+				+ ", studentclass=" + studentclass + ", studentsection="
+				+ studentsection + ", photo=" + photo + ", route=" + route
+				+ ", stop=" + stop + ", school=" + school + "]";
 	}
-	
 	
 }

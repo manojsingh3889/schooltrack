@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.UUID;
 
-public class passwordUtility {
+public class PasswordUtility {
 	public static String generateMD5(String passwordToHash){
 		String generatedPassword = null;
 		try {// Create MessageDigest instance for MD5

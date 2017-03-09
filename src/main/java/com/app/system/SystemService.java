@@ -14,7 +14,7 @@ import com.app.data.dao.PriviledgeDAO;
 import com.app.data.dao.RoleDAO;
 import com.app.data.dao.UserInfoDAO;
 import com.app.data.dao.UserLoginDAO;
-import com.app.utility.passwordUtility;
+import com.app.utility.PasswordUtility;
 import com.sun.org.apache.regexp.internal.recompile;
 
 @Component

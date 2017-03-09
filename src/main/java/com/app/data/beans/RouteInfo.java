@@ -13,7 +13,7 @@ public class RouteInfo {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="route_id")
+	@Column(name="id")
 	private Integer routeid;
 	
 	@Column(name="routenumber")
@@ -25,10 +25,6 @@ public class RouteInfo {
 	@Column(name="routearea")
 	private String routearea;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name="handler_id")
-	private Integer handlerid;
-	
 	@Column(name="busplatenumber")
 	private String busplatenumber;
 	
@@ -37,24 +33,22 @@ public class RouteInfo {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
-	private Integer schoolid;
+	private SchoolInfo school;
 	
 	public RouteInfo() {
-		super();
 	}
 
 	public RouteInfo(Integer routeid, String routenumber, Integer seatcapacity,
-			String routearea, Integer handlerid, String busplatenumber,
-			Integer seatsleft, Integer schoolid) {
+			String routearea, String busplatenumber, Integer seatsleft,
+			SchoolInfo school) {
 		super();
 		this.routeid = routeid;
 		this.routenumber = routenumber;
 		this.seatcapacity = seatcapacity;
 		this.routearea = routearea;
-		this.handlerid = handlerid;
 		this.busplatenumber = busplatenumber;
 		this.seatsleft = seatsleft;
-		this.schoolid = schoolid;
+		this.school = school;
 	}
 
 	public Integer getRouteid() {
@@ -89,14 +83,6 @@ public class RouteInfo {
 		this.routearea = routearea;
 	}
 
-	public Integer getHandlerid() {
-		return handlerid;
-	}
-
-	public void setHandlerid(Integer handlerid) {
-		this.handlerid = handlerid;
-	}
-
 	public String getBusplatenumber() {
 		return busplatenumber;
 	}
@@ -113,19 +99,22 @@ public class RouteInfo {
 		this.seatsleft = seatsleft;
 	}
 
-	public Integer getSchoolid() {
-		return schoolid;
+	public SchoolInfo getSchool() {
+		return school;
 	}
 
-	public void setSchoolid(Integer schoolid) {
-		this.schoolid = schoolid;
+	public void setSchool(SchoolInfo school) {
+		this.school = school;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "RouteInfo [routeid=" + routeid + ", routenumber=" + routenumber + ", seatcapacity=" + seatcapacity + ", routearea=" + routearea
-				+ ", handlerid=" + handlerid + ", busplatenumber=" + busplatenumber + ", seatsleft=" + seatsleft + ", schoolid=" + schoolid + "]";
+		return "RouteInfo [routeid=" + routeid + ", routenumber=" + routenumber
+				+ ", seatcapacity=" + seatcapacity + ", routearea=" + routearea
+				+ ", busplatenumber=" + busplatenumber + ", seatsleft="
+				+ seatsleft + ", school=" + school + "]";
 	}
+
 	
 	
 }

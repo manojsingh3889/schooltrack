@@ -10,7 +10,7 @@ import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
 import com.app.data.dao.UserInfoDAO;
 import com.app.data.dao.UserLoginDAO;
-import com.app.utility.passwordUtility;
+import com.app.utility.PasswordUtility;
 
 @Component
 public class LoginService {
@@ -27,7 +27,7 @@ public class LoginService {
 		if(userLogin!=null){
 			String passwordSalt = userLogin.getPasswordsalt();
 			String passwordHash = userLogin.getPasswordhash();
-			String password = passwordUtility.generateMD5(loginBean.getPassword()+passwordSalt);
+			String password = PasswordUtility.generateMD5(loginBean.getPassword()+passwordSalt);
 			if(password.equals(passwordHash)){
 				return userLogin;
 			}else return null;
@@ -44,8 +44,8 @@ public class LoginService {
 			String firstname = registerBean.getFirstname();
 			String lastname = registerBean.getLastname();
 			//Role role = registerBean.getRole();
-			String passwordSalt = passwordUtility.generatePasswordSalt();
-			String passwordHash = passwordUtility.generateMD5(password+passwordSalt);
+			String passwordSalt = PasswordUtility.generatePasswordSalt();
+			String passwordHash = PasswordUtility.generateMD5(password+passwordSalt);
 			userLogin = new UserLogin(email, passwordHash, passwordSalt);
 			UserInfo userInfo = new UserInfo(firstname,lastname);
 			userInfoDAO.save(userInfo);

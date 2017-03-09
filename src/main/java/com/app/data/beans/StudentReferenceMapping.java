@@ -22,43 +22,45 @@ public class StudentReferenceMapping {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="student_id")
-	private Integer studentid;
-	
-	public StudentReferenceMapping() {
-		super();
-	}
-	
+	private StudentInfo student;
+
 	public StudentReferenceMapping(Integer referenceid, String referencenumber,
-			Integer studentid) {
-		super();
-		this.referenceid = referenceid;
+			StudentInfo student) {
 		this.referencenumber = referencenumber;
-		this.studentid = studentid;
+		this.student = student;
+	}
+
+	public StudentReferenceMapping() {
 	}
 
 	public Integer getReferenceid() {
 		return referenceid;
 	}
+
 	public void setReferenceid(Integer referenceid) {
 		this.referenceid = referenceid;
 	}
+
 	public String getReferencenumber() {
 		return referencenumber;
 	}
+
 	public void setReferencenumber(String referencenumber) {
 		this.referencenumber = referencenumber;
 	}
-	public Integer getStudentid() {
-		return studentid;
+
+	public StudentInfo getStudent() {
+		return student;
 	}
-	public void setStudent_id(Integer studentid) {
-		this.studentid = studentid;
+
+	public void setStudent(StudentInfo student) {
+		this.student = student;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "StudentReferenceMapping [referenceid=" + referenceid + ", referencenumber=" + referencenumber + ", studentid=" + studentid + "]";
+		return "StudentReferenceMapping [referenceid=" + referenceid
+				+ ", referencenumber=" + referencenumber + ", student="
+				+ student + "]";
 	}
-	
 }

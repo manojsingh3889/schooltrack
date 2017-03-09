@@ -31,7 +31,7 @@
 			<artifactId>javassist</artifactId>
 			<version>3.18.0-GA</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-c3p0</artifactId>
@@ -68,6 +68,15 @@
 			<version>3.0.1</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- utility -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+
+		<!-- end of utility -->
 	</dependencies>
 	<build>
 		<finalName>schooltrackAPI</finalName>

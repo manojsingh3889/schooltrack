@@ -18,22 +18,21 @@ public class BusstopRouteMapping {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="route_id")
-	private Integer routeid;
+	private RouteInfo route;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="stop_id")
-	private Integer stopid;
+	private BusstopInfo stop;
 	
 	public BusstopRouteMapping() {
-		super();
 	}
 
-	public BusstopRouteMapping(Integer busstoprouteid, Integer routeid,
-			Integer stopid) {
+	public BusstopRouteMapping(Integer busstoprouteid, RouteInfo route,
+			BusstopInfo stop) {
 		super();
 		this.busstoprouteid = busstoprouteid;
-		this.routeid = routeid;
-		this.stopid = stopid;
+		this.route = route;
+		this.stop = stop;
 	}
 
 	public Integer getBusstoprouteid() {
@@ -44,25 +43,27 @@ public class BusstopRouteMapping {
 		this.busstoprouteid = busstoprouteid;
 	}
 
-	public Integer getRouteid() {
-		return routeid;
+	public RouteInfo getRoute() {
+		return route;
 	}
 
-	public void setRouteid(Integer routeid) {
-		this.routeid = routeid;
+	public void setRoute(RouteInfo route) {
+		this.route = route;
 	}
 
-	public Integer getStopid() {
-		return stopid;
+	public BusstopInfo getStop() {
+		return stop;
 	}
 
-	public void setStopid(Integer stopid) {
-		this.stopid = stopid;
+	public void setStop(BusstopInfo stop) {
+		this.stop = stop;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "BusstopRouteMapping [busstoprouteid=" + busstoprouteid + ", routeid=" + routeid + ", stopid=" + stopid + "]";
+		return "BusstopRouteMapping [busstoprouteid=" + busstoprouteid
+				+ ", route=" + route + ", stop=" + stop + "]";
 	}
+
 	
 }

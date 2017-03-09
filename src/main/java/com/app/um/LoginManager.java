@@ -7,6 +7,7 @@ import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
+import com.app.utility.Utility;
 
 @Component
 public class LoginManager {
@@ -14,29 +15,31 @@ public class LoginManager {
 	@Autowired
 	LoginService loginService;
 	
-	public String authenticateUser(LoginBean loginBean){
-		if(loginBean!=null){
+	public UserInfo authenticateUser(LoginBean loginBean){
+		if(!Utility.isEmpty(loginBean.getEmail()) || !Utility.isEmpty(loginBean.getPassword())){
 			UserLogin userLogin = loginService.getUserLoginObject(loginBean);
 			if(userLogin!=null){
 				UserInfo userInfo = userLogin.getUserInfo();
-				return userInfo.toString();
+				return userInfo;
 			}else{
-				return "error";
+				return null;
 			}
 		}else{
-			return "error";
+			return null;
 		} 
 	}
 	
-	public String registerUser(RegisterBean registerBean){
-		if(registerBean!=null){
+	public UserInfo registerUser(RegisterBean registerBean){
+		if(!Utility.isEmpty(registerBean.getEmail()) || !Utility.isEmpty(registerBean.getPassword())
+				|| !Utility.isEmpty(registerBean.getFirstname()) || !Utility.isEmpty(registerBean.getMobile())
+				|| !Utility.isEmpty(registerBean.getRole())){
 			UserLogin userLogin = loginService.registerUser(registerBean);
 			if(userLogin!=null)
-				return userLogin.getUserInfo().toString();
+				return userLogin.getUserInfo();
 			else
-				return "error";
+				return null;
 		}else{
-			return "error";
+			return null;
 		}
 	}
 	

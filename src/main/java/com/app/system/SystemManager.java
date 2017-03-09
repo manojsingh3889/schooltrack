@@ -4,13 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
-import org.springframework.util.StringUtils;
-
 import com.app.api.requestbean.CreatePriviledgeBean;
 import com.app.api.requestbean.CreateRoleBean;
 import com.app.data.beans.Priviledge;
 import com.app.data.beans.Role;
+import com.app.utility.Utility;
 
 
 @Component
@@ -20,7 +18,7 @@ public class SystemManager {
 	SystemService systemService;
 
 	public String createRole(CreateRoleBean bean) {
-		if(bean != null && !StringUtils.isEmpty(bean.getRoleCode())){
+		if(bean != null && !Utility.isEmpty(bean.getRoleCode())){
 			systemService.createRole(bean.getRoleCode(),bean.getRoleDisplayName(),bean.getDescription());
 			return "success";
 		}else{
@@ -29,7 +27,7 @@ public class SystemManager {
 	}
 
 	public String createPriviledge(CreatePriviledgeBean bean) {
-		if(bean != null && !StringUtils.isEmpty(bean.getPriviledgeCode())){
+		if(bean != null && !Utility.isEmpty(bean.getPriviledgeCode())){
 			systemService.createPriviledge(bean.getPriviledgeCode(),bean.getPriviledgeDisplayName(),bean.getDescription());
 			return "success";
 		}else{

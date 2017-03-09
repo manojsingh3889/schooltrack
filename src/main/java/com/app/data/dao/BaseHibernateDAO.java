@@ -82,7 +82,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 		}
 	}    
 
-	public List findByProperty(String propertyName, Object value) {
+	public List<T> findByProperty(String propertyName, Object value) {
 		log.debug("finding "+type.getSimpleName()+" instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
@@ -90,7 +90,24 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 					+ propertyName + "= ?";
 			Query queryObject = getSession().createQuery(queryString);
 			queryObject.setParameter(0, value);
-			return queryObject.list();
+			return (List<T>)queryObject.list();
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+	
+	
+	public T findUniqueByProperty(String propertyName, Object value) {
+		log.debug("finding "+type.getSimpleName()+" instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from "+type.getSimpleName()+" as model where model." 
+					+ propertyName + "= ?";
+			Query queryObject = getSession().createQuery(queryString);
+			queryObject.setParameter(0, value);
+			T instance = (T)queryObject.uniqueResult();
+			return instance;
 		} catch (RuntimeException re) {
 			log.error("find by property name failed", re);
 			throw re;
@@ -98,13 +115,13 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	}
 
 
-	public List findAll() {
+	public List<T> findAll() {
 		log.debug("finding all "+type.getSimpleName()+" instances");
 		
 		try {
 			String queryString = "from "+type.getSimpleName()+"";
 			Query queryObject = getSession().createQuery(queryString);
-			return queryObject.list();
+			return (List<T>)queryObject.list();
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
 			throw re;
