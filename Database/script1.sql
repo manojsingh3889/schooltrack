@@ -1,3 +1,13 @@
+/*
+SQLyog Community Edition- MySQL GUI v6.14
+MySQL - 5.6.30-0ubuntu0.14.04.1-log : Database - stdummy
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
 create database if not exists `stdummy`;
 
 USE `stdummy`;
@@ -34,7 +44,7 @@ CREATE TABLE `priviledge` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`priviledge_id`),
   UNIQUE KEY `unique_code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `priviledge` */
 
@@ -91,11 +101,11 @@ CREATE TABLE `route_info` (
 
 /*Data for the table `route_info` */
 
-/*Table structure for table `routetracking` */
+/*Table structure for table `route_tracking` */
 
-DROP TABLE IF EXISTS `routetracking`;
+DROP TABLE IF EXISTS `route_tracking`;
 
-CREATE TABLE `routetracking` (
+CREATE TABLE `route_tracking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `currentlattitude` varchar(100) NOT NULL,
   `currentlongitude` varchar(100) NOT NULL,
@@ -104,7 +114,7 @@ CREATE TABLE `routetracking` (
   UNIQUE KEY `route_id` (`route_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `routetracking` */
+/*Data for the table `route_tracking` */
 
 /*Table structure for table `school_info` */
 
@@ -164,25 +174,12 @@ CREATE TABLE `student_info` (
   `route_id` int(11) DEFAULT NULL,
   `stop_id` int(11) DEFAULT NULL,
   `school_id` int(11) NOT NULL,
-  PRIMARY KEY (`student_id`)
+  `referencenumber` varchar(100) NOT NULL,
+  PRIMARY KEY (`student_id`),
+  UNIQUE KEY `referencenumber` (`referencenumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_info` */
-
-/*Table structure for table `student_reference` */
-
-DROP TABLE IF EXISTS `student_reference`;
-
-CREATE TABLE `student_reference` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `referencenumber` varchar(255) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `referencenumber` (`referencenumber`),
-  UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `student_reference` */
 
 /*Table structure for table `user_info` */
 
@@ -217,6 +214,20 @@ CREATE TABLE `user_login` (
 /*Data for the table `user_login` */
 
 insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values (1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1),(2,'test@s.com','61d5217883277b96b5d105aa5f8a4b7b','9fca2264c9a1e7b3e9f135185444b4ce',2);
+
+/*Table structure for table `user_student` */
+
+DROP TABLE IF EXISTS `user_student`;
+
+CREATE TABLE `user_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user_student` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
