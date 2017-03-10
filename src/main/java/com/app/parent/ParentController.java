@@ -41,7 +41,7 @@ public class ParentController {
 		return new ResponseEntity(parentManager.getStop(stopId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/getAllBusStops/{routeId}")
+	@RequestMapping(method=RequestMethod.POST,value="/getAllStops/{routeId}")
 	public ResponseEntity getStops(@PathVariable("routeId") Integer routeId){
 		return new ResponseEntity(parentManager.getStops(routeId),HttpStatus.OK);
 	}
