@@ -12,14 +12,12 @@ import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
 import com.app.data.beans.StudentInfo;
-import com.app.data.beans.StudentReferenceMapping;
+import com.app.data.beans.UserInfo;
+import com.app.data.beans.UserStudentMapping;
 import com.app.data.dao.BaseHibernateDAO;
 
 @Component
 public class ParentService {
-
-	@Autowired
-	BaseHibernateDAO<StudentReferenceMapping> studentReferenceBaseHibernateDAO;
 	
 	@Autowired
 	BaseHibernateDAO<StudentInfo> studentBaseHibernateDAO;
@@ -31,18 +29,32 @@ public class ParentService {
 	BaseHibernateDAO<SchoolInfo> schoolBaseHibernateDAO;
 	
 	@Autowired
-	BaseHibernateDAO<StopRouteMapping> busstopRouteBaseHibernateDAO;
+	BaseHibernateDAO<StopRouteMapping> stopRouteBaseHibernateDAO;
 	
 	@Autowired
-	BaseHibernateDAO<StopInfo> busstopBaseHibernateDAO;
+	BaseHibernateDAO<StopInfo> stopBaseHibernateDAO;
 	
 	@Autowired
 	BaseHibernateDAO<RouteTracking> routeTrackingBaseHibernateDAO;
 	
+	@Autowired
+	BaseHibernateDAO<UserStudentMapping> userStudentBaseHibernateDAO;
+	
+	@Autowired
+	BaseHibernateDAO<UserInfo> userBaseHibernateDAO;
+	
 	public StudentInfo getStudentFromReference(String referenceNumber){
-		StudentReferenceMapping referenceMapping = studentReferenceBaseHibernateDAO.findUniqueByProperty("referencenumber", referenceNumber);
-		if(referenceMapping!=null){
-			return referenceMapping.getStudent();
+		StudentInfo studentInfo = studentBaseHibernateDAO.findUniqueByProperty("referencenumber", referenceNumber);
+		if(studentInfo!=null){
+			return studentInfo;
+		}else
+			return null;
+	}
+	
+	public UserInfo getUserInfo(Integer userId){
+		UserInfo userInfo = userBaseHibernateDAO.findUniqueByProperty("userid", userId);
+		if(userInfo!=null){
+			return userInfo;
 		}else
 			return null;
 	}
@@ -72,7 +84,7 @@ public class ParentService {
 	}
 	
 	public StopInfo getStop(Integer stopId){
-		StopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
+		StopInfo busstopInfo = stopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
 		if(busstopInfo!=null){
 			return busstopInfo;
 		}else
@@ -80,7 +92,7 @@ public class ParentService {
 	}
 	
 	public List<StopInfo> getStops(Integer routeId){
-		List<StopRouteMapping> BusstopRouteMappingList = busstopRouteBaseHibernateDAO.findByProperty("routeId", routeId);
+		List<StopRouteMapping> BusstopRouteMappingList = stopRouteBaseHibernateDAO.findByProperty("routeId", routeId);
 		if(BusstopRouteMappingList!=null){
 			List<StopInfo> busstopInfoList = new ArrayList<StopInfo>();
 			for(StopRouteMapping routeMapping : BusstopRouteMappingList){
@@ -101,7 +113,7 @@ public class ParentService {
 	
 	public StudentInfo setStop(Integer studentId,Integer stopId){
 		StudentInfo studentInfo = studentBaseHibernateDAO.findUniqueByProperty("studentid", studentId);
-		StopInfo busstopInfo = busstopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
+		StopInfo busstopInfo = stopBaseHibernateDAO.findUniqueByProperty("stopid", stopId);
 		if(studentInfo!=null && busstopInfo!=null){
 			studentInfo.setStop(busstopInfo);
 			return studentInfo;
@@ -109,4 +121,11 @@ public class ParentService {
 			return null;
 	}
 	
+	public UserStudentMapping addUserStudentMap(StudentInfo studentInfo, UserInfo userInfo){
+		UserStudentMapping userStudentMapping = new UserStudentMapping();
+		userStudentMapping.setStudent(studentInfo);
+		userStudentMapping.setUser(userInfo);
+		userStudentBaseHibernateDAO.save(userStudentMapping);
+		return userStudentMapping;
+	}
 }

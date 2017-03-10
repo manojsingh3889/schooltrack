@@ -15,9 +15,10 @@ public class ParentController {
 	@Autowired
 	ParentManager parentManager;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/addstudent/{referenceNumber}")
-	public ResponseEntity addStudent(@PathVariable("referenceNumber") String referenceNumber){
-		return new ResponseEntity(parentManager.addStudent(referenceNumber),HttpStatus.OK);
+	@RequestMapping(method=RequestMethod.POST,value="/addstudent/{referenceNumber,userId}")
+	public ResponseEntity addStudent(@PathVariable("referenceNumber") String referenceNumber
+			,@PathVariable("userId") Integer userId){
+		return new ResponseEntity(parentManager.addStudent(referenceNumber,userId),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/getStudentInfo/{studentId}")

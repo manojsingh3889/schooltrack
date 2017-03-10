@@ -2,15 +2,24 @@ package com.app.data.beans;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-public class StopRouteMapping {
 
+@Entity
+@Table(name="stop_route", 
+uniqueConstraints = {@UniqueConstraint(columnNames = {"route_id","stop_id"})})
+public class StopRouteMapping implements java.io.Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="stop_route_id")

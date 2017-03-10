@@ -1,29 +1,37 @@
 package com.app.um;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
-import com.app.data.beans.Role;
+import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
-import com.app.data.dao.UserInfoDAO;
-import com.app.data.dao.UserLoginDAO;
+import com.app.data.beans.UserStudentMapping;
+import com.app.data.dao.BaseHibernateDAO;
 import com.app.utility.PasswordUtility;
 
 @Component
 public class LoginService {
 	
 	@Autowired
-	UserLoginDAO userLoginDAO;
+	BaseHibernateDAO<UserLogin> userLoginBaseHibernateDAO;
 	
 	@Autowired
-	UserInfoDAO userInfoDAO;
+	BaseHibernateDAO<UserInfo> userInfoBaseHibernateDAO;
+	
+	@Autowired
+	BaseHibernateDAO<StudentInfo> studentInfoBaseHibernateDAO;
+	
+	@Autowired
+	BaseHibernateDAO<UserStudentMapping> userStudentBaseHibernateDAO;
 	
 	//check username and password correct and then return userLogin Object
 	public UserLogin getUserLoginObject(LoginBean loginBean) {
-		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(loginBean.getEmail());
+		UserLogin userLogin = (UserLogin) userLoginBaseHibernateDAO.findUniqueByProperty("email", loginBean.getEmail());
 		if(userLogin!=null){
 			String passwordSalt = userLogin.getPasswordsalt();
 			String passwordHash = userLogin.getPasswordhash();
@@ -35,10 +43,20 @@ public class LoginService {
 			return null;
 		}
 	}
+	
+	
+	public List<UserStudentMapping> getStudentMappingList(UserInfo userInfo) {
+		List<UserStudentMapping> userStudentMappingList = userStudentBaseHibernateDAO.findByProperty("user", userInfo);
+		if(userStudentMappingList!=null){
+			return userStudentMappingList;
+		}else{
+			return null;
+		}
+	}
 
 	public UserLogin registerUser(RegisterBean registerBean){
 		String email = registerBean.getEmail();
-		UserLogin userLogin = (UserLogin) userLoginDAO.findByEmail(email);
+		UserLogin userLogin = (UserLogin) userLoginBaseHibernateDAO.findUniqueByProperty("email", registerBean.getEmail());
 		if(userLogin==null){
 			String password = registerBean.getPassword();
 			String firstname = registerBean.getFirstname();
@@ -48,9 +66,9 @@ public class LoginService {
 			String passwordHash = PasswordUtility.generateMD5(password+passwordSalt);
 			userLogin = new UserLogin(email, passwordHash, passwordSalt);
 			UserInfo userInfo = new UserInfo(firstname,lastname);
-			userInfoDAO.save(userInfo);
+			userInfoBaseHibernateDAO.save(userInfo);
 			userLogin.setUserInfo(userInfo);
-			userLoginDAO.save(userLogin);
+			userLoginBaseHibernateDAO.save(userLogin);
 			return userLogin;
 		}else{
 			return null;

@@ -1,0 +1,77 @@
+package com.app.data.beans;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+
+@Entity
+@Table(name="user_student", 
+uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","student_id"})})
+public class UserStudentMapping implements java.io.Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private Integer id;
+	
+	@OneToMany
+	@JoinColumn(name="user_id")
+	private UserInfo user;
+	
+	@ManyToOne
+	@JoinColumn(name="student_id")
+	private StudentInfo student;
+
+	public UserStudentMapping(){
+	}
+
+	public UserStudentMapping(Integer id, UserInfo user, StudentInfo student) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.student = student;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public UserInfo getUser() {
+		return user;
+	}
+
+	public void setUser(UserInfo user) {
+		this.user = user;
+	}
+
+	public StudentInfo getStudent() {
+		return student;
+	}
+
+	public void setStudent(StudentInfo student) {
+		this.student = student;
+	}
+
+	@Override
+	public String toString() {
+		return "UserStudentMapping [id=" + id + ", user=" + user + ", student="
+				+ student + "]";
+	}
+
+		
+	
+}

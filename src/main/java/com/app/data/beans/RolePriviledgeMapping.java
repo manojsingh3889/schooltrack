@@ -13,8 +13,10 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name="role_priviledge", 
 uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id","priviledge_id"})})
-public class RolePriviledgeMapping {
+public class RolePriviledgeMapping implements java.io.Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")

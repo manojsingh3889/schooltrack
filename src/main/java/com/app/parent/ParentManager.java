@@ -10,6 +10,7 @@ import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
 import com.app.data.beans.StudentInfo;
+import com.app.data.beans.UserInfo;
 import com.app.utility.Utility;
 
 @Component
@@ -18,14 +19,27 @@ public class ParentManager {
 	@Autowired
 	ParentService parentService;
 	
-	public StudentInfo addStudent(String referenceNumber){
+	public StudentInfo addStudent(String referenceNumber,Integer userId){
 		if(!Utility.isEmpty(referenceNumber)){
 			StudentInfo studentInfo = parentService.getStudentFromReference(referenceNumber);
 			if(studentInfo!=null){
+				UserInfo userInfo = getUserInfo(userId);
+				parentService.addUserStudentMap(studentInfo,userInfo);
 				return studentInfo;
 			}else{
 				return null;
 			}
+		}else
+			return null;
+	}
+	
+	public UserInfo getUserInfo(Integer userId){
+		if(userId!=null){
+			UserInfo userInfo = parentService.getUserInfo(userId);
+			if(userInfo!=null){
+				return userInfo;
+			}else 
+				return null;
 		}else
 			return null;
 	}
@@ -96,6 +110,7 @@ public class ParentManager {
 			return null;
 	}
 	
+	//for changing and setting stop of student 
 	public StudentInfo setStop(Integer studentId,Integer stopId){
 		if(studentId!=null && stopId!=null){
 			StudentInfo studentInfo = parentService.setStop(studentId,stopId);
@@ -114,6 +129,7 @@ public class ParentManager {
 				RouteInfo routeInfo = studentInfo.getRoute();
 				SchoolInfo schoolInfo = studentInfo.getSchool();
 				StopInfo busstopInfo = studentInfo.getStop();
+				//ask how to return
 				return studentInfo;
 			}else 
 				return null;

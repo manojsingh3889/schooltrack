@@ -2,14 +2,22 @@ package com.app.data.beans;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-public class StudentInfo {
+@Entity
+@Table(name="student_info", 
+uniqueConstraints = {@UniqueConstraint(columnNames = {"referencenumber"})})
+public class StudentInfo implements java.io.Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,6 +42,9 @@ public class StudentInfo {
 	@Column(name="photo")
 	private String photo;
 	
+	@Column(name="referencenumber")
+	private String referencenumber;
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="route_id")
 	private RouteInfo route;
@@ -51,8 +62,8 @@ public class StudentInfo {
 
 	public StudentInfo(Integer studentid, String firstname, String lastname,
 			String registrationnumber, String studentclass,
-			String studentsection, String photo, RouteInfo route,
-			StopInfo stop, SchoolInfo school) {
+			String studentsection, String photo, String referencenumber,
+			RouteInfo route, StopInfo stop, SchoolInfo school) {
 		super();
 		this.studentid = studentid;
 		this.firstname = firstname;
@@ -61,6 +72,7 @@ public class StudentInfo {
 		this.studentclass = studentclass;
 		this.studentsection = studentsection;
 		this.photo = photo;
+		this.referencenumber = referencenumber;
 		this.route = route;
 		this.stop = stop;
 		this.school = school;
@@ -122,6 +134,14 @@ public class StudentInfo {
 		this.photo = photo;
 	}
 
+	public String getReferencenumber() {
+		return referencenumber;
+	}
+
+	public void setReferencenumber(String referencenumber) {
+		this.referencenumber = referencenumber;
+	}
+
 	public RouteInfo getRoute() {
 		return route;
 	}
@@ -146,14 +166,21 @@ public class StudentInfo {
 		this.school = school;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "StudentInfo [studentid=" + studentid + ", firstname="
 				+ firstname + ", lastname=" + lastname
 				+ ", registrationnumber=" + registrationnumber
 				+ ", studentclass=" + studentclass + ", studentsection="
-				+ studentsection + ", photo=" + photo + ", route=" + route
-				+ ", stop=" + stop + ", school=" + school + "]";
+				+ studentsection + ", photo=" + photo + ", referencenumber="
+				+ referencenumber + ", route=" + route + ", stop=" + stop
+				+ ", school=" + school + "]";
 	}
+
+	
 	
 }

@@ -15,6 +15,8 @@ import javax.persistence.Id;
 @Table(name="priviledge")
 public class Priviledge  implements java.io.Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id 
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="priviledge_id", unique=true, nullable=false)
