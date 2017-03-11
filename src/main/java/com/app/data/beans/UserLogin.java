@@ -34,7 +34,7 @@ public class UserLogin  implements java.io.Serializable {
 	private String passwordsalt;
 
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	private UserInfo userInfo;
 

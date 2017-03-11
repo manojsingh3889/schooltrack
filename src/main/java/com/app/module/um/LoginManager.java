@@ -32,7 +32,7 @@ public class LoginManager {
 			if(userLogin!=null){
 				UserInfo userInfo = userLogin.getUserInfo();
 				Role role = userInfo.getRole();
-				if("parent".equalsIgnoreCase(role.getCodeName())){
+				if(role!=null && "parent".equalsIgnoreCase(role.getCodeName())){
 					List<UserStudentMapping> userStudentMappingList = parentService.getStudentMappingList(userInfo);
 					if(userStudentMappingList!=null){
 						List<StudentInfo> studentInfoList = new ArrayList<StudentInfo>();
@@ -43,13 +43,13 @@ public class LoginManager {
 						return userInfo;
 					}else
 						return userInfo;
-				}else if("handler".equalsIgnoreCase(role.getCodeName())){
+				}/*else if("handler".equalsIgnoreCase(role.getCodeName())){
 					
 				}else if("admin".equalsIgnoreCase(role.getCodeName())){
 					
 				}else if("system".equalsIgnoreCase(role.getCodeName())){
 					
-				}
+				}*/
 				
 				return userInfo;
 			}else{

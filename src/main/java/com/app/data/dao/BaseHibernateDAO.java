@@ -23,7 +23,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	protected static final Logger log = LoggerFactory.getLogger(BaseHibernateDAO.class);
 	
 	private final Class<T> type;
-//	protected abstract Class getBeanType(); 
+
 	protected BaseHibernateDAO(Class<T> type){
 		this.type = type;
 	}

@@ -29,7 +29,7 @@ public class UserInfo  implements java.io.Serializable {
 	@Column(name="lastname")
 	private String lastname;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="role_id",nullable=true)
 	private Role role;
 
