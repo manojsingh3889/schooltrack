@@ -18,7 +18,7 @@ public class Role  implements java.io.Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="role_id")
+	@Column(name="id")
 	private Integer roleId;
 	
 	@Column(name="code", nullable=false, unique=true)

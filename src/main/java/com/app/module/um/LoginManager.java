@@ -1,4 +1,4 @@
-package com.app.um;
+package com.app.module.um;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,18 @@ import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
 import com.app.data.beans.UserStudentMapping;
+import com.app.data.service.ParentService;
+import com.app.data.service.UserService;
 import com.app.utility.Utility;
 
 @Component
 public class LoginManager {
 	
 	@Autowired
-	LoginService loginService;
+	UserService loginService;
+	
+	@Autowired
+	ParentService parentService;
 	
 	public UserInfo authenticateUser(LoginBean loginBean){
 		if(!Utility.isEmpty(loginBean.getEmail()) || !Utility.isEmpty(loginBean.getPassword())){
@@ -28,7 +33,7 @@ public class LoginManager {
 				UserInfo userInfo = userLogin.getUserInfo();
 				Role role = userInfo.getRole();
 				if("parent".equalsIgnoreCase(role.getCodeName())){
-					List<UserStudentMapping> userStudentMappingList = loginService.getStudentMappingList(userInfo);
+					List<UserStudentMapping> userStudentMappingList = parentService.getStudentMappingList(userInfo);
 					if(userStudentMappingList!=null){
 						List<StudentInfo> studentInfoList = new ArrayList<StudentInfo>();
 						for(UserStudentMapping studentMapping : userStudentMappingList){

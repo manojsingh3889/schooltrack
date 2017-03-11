@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 
 @Entity
@@ -21,7 +20,7 @@ public class RouteTracking implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="student_id")
+	@Column(name="id")
 	private Integer id;
 	
 	@Column(name="currentlattitude")

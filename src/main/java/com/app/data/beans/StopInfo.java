@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="stop_info")
@@ -16,7 +15,7 @@ public class StopInfo implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="stop_id")
+	@Column(name="id")
 	private Integer stopid;
 	
 	@Column(name="stoplattitude")

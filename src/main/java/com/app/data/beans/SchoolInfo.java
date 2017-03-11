@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="school_info")
@@ -16,7 +15,7 @@ public class SchoolInfo implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="school_id")
+	@Column(name="id")
 	private Integer schoolid;
 	
 	@Column(name="area")

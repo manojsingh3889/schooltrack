@@ -1,4 +1,4 @@
-package com.app.handler;
+package com.app.module.handler;
 
 public class HandlerService {
 

@@ -21,7 +21,7 @@ public class StudentInfo implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="student_id")
+	@Column(name="id")
 	private Integer studentid;
 	
 	@Column(name="firstname")

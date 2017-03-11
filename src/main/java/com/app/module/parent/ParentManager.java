@@ -1,16 +1,21 @@
-package com.app.parent;
+package com.app.module.parent;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.data.beans.StopInfo;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
+import com.app.data.beans.StopInfo;
 import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
+import com.app.data.dao.UserInfoDAO;
+import com.app.data.service.LocationService;
+import com.app.data.service.ParentService;
+import com.app.data.service.StudentService;
+import com.app.data.service.UserService;
 import com.app.utility.Utility;
 
 @Component
@@ -19,9 +24,19 @@ public class ParentManager {
 	@Autowired
 	ParentService parentService;
 	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	StudentService studentService;
+	
+	@Autowired
+	LocationService locationService;
+	
+	
 	public StudentInfo addStudent(String referenceNumber,Integer userId){
 		if(!Utility.isEmpty(referenceNumber)){
-			StudentInfo studentInfo = parentService.getStudentFromReference(referenceNumber);
+			StudentInfo studentInfo = studentService.getStudentFromReference(referenceNumber);
 			if(studentInfo!=null){
 				UserInfo userInfo = getUserInfo(userId);
 				parentService.addUserStudentMap(studentInfo,userInfo);
@@ -35,7 +50,7 @@ public class ParentManager {
 	
 	public UserInfo getUserInfo(Integer userId){
 		if(userId!=null){
-			UserInfo userInfo = parentService.getUserInfo(userId);
+			UserInfo userInfo = userService.getUserInfo(userId);
 			if(userInfo!=null){
 				return userInfo;
 			}else 
@@ -46,7 +61,7 @@ public class ParentManager {
 	
 	public StudentInfo getStudent(Integer studentId){
 		if(studentId!=null){
-			StudentInfo studentInfo = parentService.getStudent(studentId);
+			StudentInfo studentInfo = studentService.getStudent(studentId);
 			if(studentInfo!=null){
 				return studentInfo;
 			}else 
@@ -57,7 +72,7 @@ public class ParentManager {
 	
 	public RouteInfo getRoute(Integer routeId){
 		if(routeId!=null){
-			RouteInfo routeInfo = parentService.getRoute(routeId);
+			RouteInfo routeInfo = locationService.getRoute(routeId);
 			if(routeInfo!=null){
 				return routeInfo;
 			}else 
@@ -68,7 +83,7 @@ public class ParentManager {
 	
 	public SchoolInfo getSchool(Integer schoolId){
 		if(schoolId!=null){
-			SchoolInfo schoolInfo = parentService.getSchool(schoolId);
+			SchoolInfo schoolInfo = locationService.getSchool(schoolId);
 			if(schoolInfo!=null){
 				return schoolInfo;
 			}else 
@@ -79,7 +94,7 @@ public class ParentManager {
 	
 	public StopInfo getStop(Integer stopId){
 		if(stopId!=null){
-			StopInfo busstopInfo = parentService.getStop(stopId);
+			StopInfo busstopInfo = locationService.getStop(stopId);
 			if(busstopInfo!=null){
 				return busstopInfo;
 			}else 
@@ -90,7 +105,7 @@ public class ParentManager {
 	
 	public List<StopInfo> getStops(Integer routeId){
 		if(routeId!=null){
-			List<StopInfo> busStopInfoList = parentService.getStops(routeId);
+			List<StopInfo> busStopInfoList = locationService.getStops(routeId);
 			if(busStopInfoList!=null){
 				return busStopInfoList;
 			}else 
@@ -101,7 +116,7 @@ public class ParentManager {
 	
 	public RouteTracking getCurrentLocation(Integer routeId){
 		if(routeId!=null){
-			RouteTracking routeTracking = parentService.getCurrentLocation(routeId);
+			RouteTracking routeTracking = locationService.getCurrentLocation(routeId);
 			if(routeTracking!=null){
 				return routeTracking;
 			}else 
@@ -113,7 +128,7 @@ public class ParentManager {
 	//for changing and setting stop of student 
 	public StudentInfo setStop(Integer studentId,Integer stopId){
 		if(studentId!=null && stopId!=null){
-			StudentInfo studentInfo = parentService.setStop(studentId,stopId);
+			StudentInfo studentInfo = studentService.setStop(studentId,stopId);
 			if(studentInfo!=null){
 				return studentInfo;
 			}else 
@@ -124,7 +139,7 @@ public class ParentManager {
 	
 	public StudentInfo getAllInfo(Integer studentId){
 		if(studentId!=null){
-			StudentInfo studentInfo = parentService.getStudent(studentId);
+			StudentInfo studentInfo = studentService.getStudent(studentId);
 			if(studentInfo!=null){
 				RouteInfo routeInfo = studentInfo.getRoute();
 				SchoolInfo schoolInfo = studentInfo.getSchool();

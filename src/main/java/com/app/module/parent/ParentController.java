@@ -1,4 +1,4 @@
-package com.app.parent;
+package com.app.module.parent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class ParentController {
 		return new ResponseEntity(parentManager.addStudent(referenceNumber,userId),HttpStatus.OK);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/getStudentInfo/{studentId}")
+	@RequestMapping(method=RequestMethod.GET,value="/getStudentInfo/{studentId}")
 	public ResponseEntity getStudent(@PathVariable("studentId") Integer studentId){
 		return new ResponseEntity(parentManager.getStudent(studentId),HttpStatus.OK);
 	}

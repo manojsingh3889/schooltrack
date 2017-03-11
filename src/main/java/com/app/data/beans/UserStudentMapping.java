@@ -24,7 +24,7 @@ public class UserStudentMapping implements java.io.Serializable{
 	@Column(name="id")
 	private Integer id;
 	
-	@OneToMany
+	@ManyToOne
 	@JoinColumn(name="user_id")
 	private UserInfo user;
 	

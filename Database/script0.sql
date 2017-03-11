@@ -1,12 +1,3 @@
-create database if not exists `stdummy`;
-
-USE `stdummy`;
-
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
-/*Table structure for table `handler_info` */
-
 DROP TABLE IF EXISTS `handler_info`;
 
 CREATE TABLE `handler_info` (
@@ -28,34 +19,34 @@ CREATE TABLE `handler_info` (
 DROP TABLE IF EXISTS `priviledge`;
 
 CREATE TABLE `priviledge` (
-  `priviledge_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`priviledge_id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `unique_code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `priviledge` */
 
-insert  into `priviledge`(`priviledge_id`,`code`,`display_name`,`description`) values (1,'addPriviledge','Add Priviledge',NULL),(2,'addStudent','add student','add student');
+insert  into `priviledge`(`id`,`code`,`display_name`,`description`) values (3,'addPriviledge','add Priviledge','sdfsdf');
 
 /*Table structure for table `role` */
 
 DROP TABLE IF EXISTS `role`;
 
 CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(50) NOT NULL,
   `display_name` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role_id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `unique_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `role` */
 
-insert  into `role`(`role_id`,`code`,`display_name`,`description`) values (1,'system','System User','System user for support and backened work.'),(2,'admin','school admin','school admin'),(7,'test','t','ttttt');
+insert  into `role`(`id`,`code`,`display_name`,`description`) values (1,'system','System User','System user for support and backened work.'),(2,'admin','school admin','school admin'),(7,'test','t','ttttt');
 
 /*Table structure for table `role_priviledge` */
 
@@ -66,7 +57,7 @@ CREATE TABLE `role_priviledge` (
   `role_id` varchar(255) NOT NULL,
   `priviledge_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique` (`role_id`,`priviledge_id`)
+  UNIQUE KEY `unique_role_priviledge` (`role_id`,`priviledge_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `role_priviledge` */
@@ -86,16 +77,17 @@ CREATE TABLE `route_info` (
   `seatsleft` int(10) DEFAULT NULL,
   `school_id` int(11) NOT NULL,
   `tripstatus` enum('Started','Stopped') NOT NULL DEFAULT 'Stopped',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_school_route` (`routenumber`,`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `route_info` */
 
-/*Table structure for table `routetracking` */
+/*Table structure for table `route_tracking` */
 
-DROP TABLE IF EXISTS `routetracking`;
+DROP TABLE IF EXISTS `route_tracking`;
 
-CREATE TABLE `routetracking` (
+CREATE TABLE `route_tracking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `currentlattitude` varchar(100) NOT NULL,
   `currentlongitude` varchar(100) NOT NULL,
@@ -104,18 +96,18 @@ CREATE TABLE `routetracking` (
   UNIQUE KEY `route_id` (`route_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-/*Data for the table `routetracking` */
+/*Data for the table `route_tracking` */
 
 /*Table structure for table `school_info` */
 
 DROP TABLE IF EXISTS `school_info`;
 
 CREATE TABLE `school_info` (
-  `school_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `area` varchar(255) NOT NULL,
   `contactnumber1` varchar(100) NOT NULL,
-  `contactnumber2` varchar(100) NOT NULL,
-  PRIMARY KEY (`school_id`)
+  `contactnumber2` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `school_info` */
@@ -125,12 +117,11 @@ CREATE TABLE `school_info` (
 DROP TABLE IF EXISTS `stop_info`;
 
 CREATE TABLE `stop_info` (
-  `stop_id` int(11) NOT NULL AUTO_INCREMENT,
-  `stoplattitude` varchar(100) NOT NULL,
-  `stoplongitude` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lattitude` varchar(100) NOT NULL,
+  `longitude` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
-  PRIMARY KEY (`stop_id`,`stoplattitude`,`stoplongitude`,`address`),
-  UNIQUE KEY `stop_id` (`stop_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `stop_info` */
@@ -140,10 +131,10 @@ CREATE TABLE `stop_info` (
 DROP TABLE IF EXISTS `stop_route`;
 
 CREATE TABLE `stop_route` (
-  `stop_route_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `route_id` int(11) NOT NULL,
   `stop_id` int(11) NOT NULL,
-  PRIMARY KEY (`stop_route_id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `route_id` (`route_id`,`stop_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -154,7 +145,7 @@ CREATE TABLE `stop_route` (
 DROP TABLE IF EXISTS `student_info`;
 
 CREATE TABLE `student_info` (
-  `student_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) DEFAULT NULL,
   `registrationnumber` varchar(255) NOT NULL,
@@ -164,25 +155,12 @@ CREATE TABLE `student_info` (
   `route_id` int(11) DEFAULT NULL,
   `stop_id` int(11) DEFAULT NULL,
   `school_id` int(11) NOT NULL,
-  PRIMARY KEY (`student_id`)
+  `referencenumber` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `referencenumber` (`referencenumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_info` */
-
-/*Table structure for table `student_reference` */
-
-DROP TABLE IF EXISTS `student_reference`;
-
-CREATE TABLE `student_reference` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `referencenumber` varchar(255) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `referencenumber` (`referencenumber`),
-  UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-/*Data for the table `student_reference` */
 
 /*Table structure for table `user_info` */
 
@@ -218,5 +196,15 @@ CREATE TABLE `user_login` (
 
 insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values (1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1),(2,'test@s.com','61d5217883277b96b5d105aa5f8a4b7b','9fca2264c9a1e7b3e9f135185444b4ce',2);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*Table structure for table `user_student` */
+
+DROP TABLE IF EXISTS `user_student`;
+
+CREATE TABLE `user_student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

@@ -1,21 +1,14 @@
-package com.app.system;
+package com.app.data.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.Priviledge;
 import com.app.data.beans.Role;
-import com.app.data.beans.UserInfo;
-import com.app.data.beans.UserLogin;
 import com.app.data.dao.PriviledgeDAO;
 import com.app.data.dao.RoleDAO;
-import com.app.data.dao.UserInfoDAO;
-import com.app.data.dao.UserLoginDAO;
-import com.app.utility.PasswordUtility;
-import com.sun.org.apache.regexp.internal.recompile;
 
 @Component
 public class SystemService {

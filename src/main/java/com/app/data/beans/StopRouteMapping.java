@@ -22,7 +22,7 @@ public class StopRouteMapping implements java.io.Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="stop_route_id")
+	@Column(name="id")
 	private Integer stoprouteid;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)

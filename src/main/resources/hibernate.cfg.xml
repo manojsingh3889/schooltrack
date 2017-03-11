@@ -19,8 +19,17 @@
 
 		<mapping class="com.app.data.beans.Role"/>
 		<mapping class="com.app.data.beans.Priviledge"/>
+		<mapping class="com.app.data.beans.RolePriviledgeMapping"/>
+		
 		<mapping class="com.app.data.beans.UserInfo"/>
 		<mapping class="com.app.data.beans.UserLogin"/>
-		<mapping class="com.app.data.beans.RolePriviledgeMapping"/>
+		<mapping class="com.app.data.beans.UserStudentMapping"/>
+		<mapping class="com.app.data.beans.StudentInfo"/>
+		
+		<mapping class="com.app.data.beans.RouteInfo"/>
+		<mapping class="com.app.data.beans.RouteTracking"/>
+		<mapping class="com.app.data.beans.SchoolInfo"/>
+		<mapping class="com.app.data.beans.StopInfo"/>
+		<mapping class="com.app.data.beans.StopRouteMapping"/>
 	</session-factory>
 </hibernate-configuration>

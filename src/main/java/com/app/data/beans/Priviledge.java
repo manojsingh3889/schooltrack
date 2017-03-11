@@ -5,9 +5,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 
@@ -19,7 +19,7 @@ public class Priviledge  implements java.io.Serializable {
 	
 	@Id 
 	@GeneratedValue(strategy=IDENTITY)
-	@Column(name="priviledge_id", unique=true, nullable=false)
+	@Column(name="id", unique=true, nullable=false)
 	private Integer priviledgeId;
 
 	@Column(name="code", nullable=false, unique=true)

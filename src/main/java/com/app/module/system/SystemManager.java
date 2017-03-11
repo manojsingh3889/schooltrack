@@ -1,13 +1,15 @@
-package com.app.system;
+package com.app.module.system;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import com.app.api.requestbean.CreatePriviledgeBean;
 import com.app.api.requestbean.CreateRoleBean;
 import com.app.data.beans.Priviledge;
 import com.app.data.beans.Role;
+import com.app.data.service.SystemService;
 import com.app.utility.Utility;
 
 
