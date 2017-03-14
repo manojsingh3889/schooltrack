@@ -27,10 +27,14 @@ public class UserService {
 			String passwordSalt = userLogin.getPasswordsalt();
 			String passwordHash = userLogin.getPasswordhash();
 			String password = PasswordUtility.generateMD5(loginBean.getPassword()+passwordSalt);
-			if(password.equals(passwordHash)){
+			
+			if(password.equals(passwordHash))
 				return userLogin;
-			}else return null;
+			else 
+				return null;//TODO user auth failed
+			
 		}else{
+			//TODO user doesn't exist
 			return null;
 		}
 	}
@@ -53,6 +57,7 @@ public class UserService {
 			userLoginDAO.save(userLogin);
 			return userLogin;
 		}else{
+			//TODO return exception for duplicate user
 			return null;
 		}
 	}

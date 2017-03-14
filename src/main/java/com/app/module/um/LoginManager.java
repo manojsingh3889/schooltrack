@@ -15,6 +15,9 @@ import com.app.data.beans.UserLogin;
 import com.app.data.beans.UserStudentMapping;
 import com.app.data.service.ParentService;
 import com.app.data.service.UserService;
+import com.app.role.task.RoleBasedTask;
+import com.app.role.task.RoleBeanBuilder;
+import com.app.role.task.WorkerRepo;
 import com.app.utility.Utility;
 
 @Component
@@ -31,26 +34,18 @@ public class LoginManager {
 			UserLogin userLogin = loginService.getUserLoginObject(loginBean);
 			if(userLogin!=null){
 				UserInfo userInfo = userLogin.getUserInfo();
-				Role role = userInfo.getRole();
-				if(role!=null && "parent".equalsIgnoreCase(role.getCodeName())){
-					List<UserStudentMapping> userStudentMappingList = parentService.getStudentMappingList(userInfo);
-					if(userStudentMappingList!=null){
-						List<StudentInfo> studentInfoList = new ArrayList<StudentInfo>();
-						for(UserStudentMapping studentMapping : userStudentMappingList){
-							studentInfoList.add(studentMapping.getStudent());
-						}
-						//ask how to return with studentList
-						return userInfo;
-					}else
-						return userInfo;
-				}/*else if("handler".equalsIgnoreCase(role.getCodeName())){
-					
-				}else if("admin".equalsIgnoreCase(role.getCodeName())){
-					
-				}else if("system".equalsIgnoreCase(role.getCodeName())){
-					
-				}*/
 				
+				if(userInfo.getRole() !=null){
+					Role role = userInfo.getRole();
+					
+					try {
+						String workerName = WorkerRepo.WORKER_PACKAGE+"."+role.getTaskWorkerMaps().get(RoleBeanBuilder.class.getSimpleName());
+						RoleBeanBuilder beanBuilder = WorkerRepo.getWorker(workerName);
+						System.err.println(beanBuilder);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
 				return userInfo;
 			}else{
 				return null;

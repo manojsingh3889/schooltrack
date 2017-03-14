@@ -1,12 +1,19 @@
 package com.app.data.beans;
 // default package
 
+import java.util.Map;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 
 
 @Entity
@@ -15,23 +22,27 @@ import javax.persistence.Table;
 public class Role  implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer roleId;
-	
+
 	@Column(name="code", nullable=false, unique=true)
 	private String codeName;
 
 	@Column(name="display_name")
 	private String displayName;
-	
+
 	@Column(name="description")
 	private String description;
 
-	
-	
+	@ElementCollection (fetch=FetchType.EAGER)
+	@CollectionTable(name="role_based_worker" , joinColumns=@JoinColumn(name="role_id"))
+	@MapKeyColumn(name="task")
+	@Column(name="worker")
+	private Map<String, String> taskWorkerMap;
+
 	public Role() {
 	}
 
@@ -71,5 +82,13 @@ public class Role  implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Map<String, String> getTaskWorkerMaps() {
+		return taskWorkerMap;
+	}
+
+	public void setTaskWorkerMaps(Map<String, String> taskWorkerMap) {
+		this.taskWorkerMap = taskWorkerMap;
 	}
 }
