@@ -1,6 +1,7 @@
 package com.app.module.parent;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,9 +10,9 @@ import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
 import com.app.data.beans.StopInfo;
+import com.app.data.beans.StopInfoPriorityBean;
 import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
-import com.app.data.dao.UserInfoDAO;
 import com.app.data.service.LocationService;
 import com.app.data.service.ParentService;
 import com.app.data.service.StudentService;
@@ -103,11 +104,11 @@ public class ParentManager {
 			return null;	
 	}
 	
-	public List<StopInfo> getStops(Integer routeId){
+	public TreeMap<Integer, StopInfo> getStops(Integer routeId){
 		if(routeId!=null){
-			List<StopInfo> busStopInfoList = locationService.getStops(routeId);
-			if(busStopInfoList!=null){
-				return busStopInfoList;
+			TreeMap<Integer, StopInfo> busStopInfoMap = locationService.getStops(routeId);
+			if(busStopInfoMap!=null){
+				return busStopInfoMap;
 			}else 
 				return null;
 		}else
@@ -151,4 +152,16 @@ public class ParentManager {
 		}else
 			return null;	
 	}
+	
+	/*public Integer getDistance(String bus, String currentStop, Integer nextcallTime, TreeMap<Integer, StopInfoPriorityBean> stopPriorityMap){
+		if(!Utility.isEmpty(bus) && !Utility.isEmpty(currentStop) && nextcallTime!=null && stopPriorityMap!=null && !stopPriorityMap.isEmpty()){
+			Integer x = locationService.computeTime(bus, currentStop, nextcallTime, stopPriorityMap);
+			if(x!=null){
+				//ask how to return
+				return x;
+			}else 
+				return null;
+		}else
+			return null;	
+	}*/
 }

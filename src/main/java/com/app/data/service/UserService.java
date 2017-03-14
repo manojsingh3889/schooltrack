@@ -5,11 +5,8 @@ import org.springframework.stereotype.Component;
 
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
-import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
-import com.app.data.beans.UserStudentMapping;
-import com.app.data.dao.BaseHibernateDAO;
 import com.app.data.dao.UserInfoDAO;
 import com.app.data.dao.UserLoginDAO;
 import com.app.utility.PasswordUtility;

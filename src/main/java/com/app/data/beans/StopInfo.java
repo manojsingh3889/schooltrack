@@ -18,10 +18,10 @@ public class StopInfo implements java.io.Serializable{
 	@Column(name="id")
 	private Integer stopid;
 	
-	@Column(name="stoplattitude")
+	@Column(name="lattitude")
 	private String stoplattitude;
 	
-	@Column(name="stoplongitude")
+	@Column(name="longitude")
 	private String stoplongitude;
 	
 	@Column(name="address")

@@ -33,14 +33,19 @@ public class StopRouteMapping implements java.io.Serializable{
 	@JoinColumn(name="stop_id")
 	private StopInfo stop;
 	
+	@Column(name="priority")
+	private Integer priority;
+	
 	public StopRouteMapping() {
 	}
 
-	public StopRouteMapping(Integer stoprouteid, RouteInfo route, StopInfo stop) {
+	public StopRouteMapping(Integer stoprouteid, RouteInfo route,
+			StopInfo stop, Integer priority) {
 		super();
 		this.stoprouteid = stoprouteid;
 		this.route = route;
 		this.stop = stop;
+		this.priority = priority;
 	}
 
 	public Integer getStoprouteid() {
@@ -67,12 +72,22 @@ public class StopRouteMapping implements java.io.Serializable{
 		this.stop = stop;
 	}
 
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "StopRouteMapping [stoprouteid=" + stoprouteid + ", route="
-				+ route + ", stop=" + stop + "]";
+				+ route + ", stop=" + stop + ", priority=" + priority + "]";
 	}
 
-	
-	
 }
