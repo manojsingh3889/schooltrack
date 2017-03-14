@@ -15,5 +15,14 @@ public class Utility {
 			throw new RuntimeException("Type not supported yet.");
 		}
 	}
+	
+	//if original is null then return default
+	public static <T>  T safeValue(T target, T defaultVal){
+		if(target == null){
+			return defaultVal;
+		}else{
+			return target;
+		}
+	}
 
 }
