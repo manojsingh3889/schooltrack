@@ -3,6 +3,7 @@ package com.app.data.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.app.api.requestbean.ChangePasswordBean;
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.UserInfo;
@@ -61,7 +62,7 @@ public class UserService {
 			return null;
 		}
 	}
-
+	
 	public UserInfo getUserInfo(Integer userId){
 		UserInfo userInfo = userInfoDAO.findById(userId);
 		if(userInfo!=null){
@@ -70,6 +71,20 @@ public class UserService {
 			return null;
 	}
 
+	public UserLogin updatePassword(ChangePasswordBean bean){
+		UserLogin userLogin = userLoginDAO.findUniqueByProperty("loginId", bean.getUserid());
+		LoginBean loginBean = new LoginBean(userLogin.getEmail(), bean.getOldPassword());
+		UserLogin login = getUserLoginObject(loginBean);
+		if(login!=null){
+			String passwordSalt = PasswordUtility.generatePasswordSalt();
+			String passwordHash = PasswordUtility.generateMD5(bean.getNewPassword()+passwordSalt);
+			userLogin = new UserLogin(userLogin.getEmail(), passwordHash, passwordSalt);
+			userLoginDAO.save(userLogin);
+			return userLogin;
+		}else
+			return null;
+	}
+	
 	/*public static void main(String[] args) {
 		LoginService loginService = new LoginService();
 		String password = "arpitporwal";

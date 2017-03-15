@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.api.requestbean.ChangePasswordBean;
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 
@@ -27,5 +28,10 @@ public class LoginController{
 	@RequestMapping(method = RequestMethod.POST, value = "/register")
 	public ResponseEntity register(@RequestBody RegisterBean bean){
 		return new ResponseEntity(loginmanager.registerUser(bean), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "/updatePassword")
+	public ResponseEntity updatePassword(@RequestBody ChangePasswordBean bean){
+		return new ResponseEntity(loginmanager.updatePassword(bean), HttpStatus.OK);
 	}
 }

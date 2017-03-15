@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -37,7 +38,7 @@ public class RouteInfo implements java.io.Serializable{
 	@Column(name="seatsleft")
 	private Integer seatsleft;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
 	private SchoolInfo school;
 	

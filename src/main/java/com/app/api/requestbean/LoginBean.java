@@ -9,8 +9,6 @@ public class LoginBean {
 		this.password = password;
 	}
 	public LoginBean() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	public String getEmail() {
 		return email;

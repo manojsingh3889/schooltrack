@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -45,15 +46,15 @@ public class StudentInfo implements java.io.Serializable{
 	@Column(name="referencenumber")
 	private String referencenumber;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="route_id")
 	private RouteInfo route;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="stop_id")
 	private StopInfo stop;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="school_id")
 	private SchoolInfo school;
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.app.api.requestbean.ChangePasswordBean;
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.Role;
@@ -28,6 +29,9 @@ public class LoginManager {
 	
 	@Autowired
 	ParentService parentService;
+	
+	@Autowired
+	UserService userService;
 	
 	public UserInfo authenticateUser(LoginBean loginBean){
 		if(!Utility.isEmpty(loginBean.getEmail()) || !Utility.isEmpty(loginBean.getPassword())){
@@ -64,6 +68,19 @@ public class LoginManager {
 				return userLogin.getUserInfo();
 			else
 				return null;
+		}else{
+			return null;
+		}
+	}
+	
+	public UserLogin updatePassword(ChangePasswordBean bean){
+		if(!Utility.isEmpty(bean.getUserid()) || !Utility.isEmpty(bean.getNewPassword()) || !Utility.isEmpty(bean.getOldPassword())){
+			UserLogin userLogin= userService.updatePassword(bean);
+			if(userLogin!=null){
+				return userLogin;
+			}else{
+				return null;
+			}
 		}else{
 			return null;
 		}

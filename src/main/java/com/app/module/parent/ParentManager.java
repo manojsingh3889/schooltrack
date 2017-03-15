@@ -1,6 +1,5 @@
 package com.app.module.parent;
 
-import java.util.HashMap;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
 import com.app.data.beans.StopInfo;
-import com.app.data.beans.StopInfoPriorityBean;
 import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
 import com.app.data.service.LocationService;
@@ -153,15 +151,4 @@ public class ParentManager {
 			return null;	
 	}
 	
-	/*public Integer getDistance(String bus, String currentStop, Integer nextcallTime, TreeMap<Integer, StopInfoPriorityBean> stopPriorityMap){
-		if(!Utility.isEmpty(bus) && !Utility.isEmpty(currentStop) && nextcallTime!=null && stopPriorityMap!=null && !stopPriorityMap.isEmpty()){
-			Integer x = locationService.computeTime(bus, currentStop, nextcallTime, stopPriorityMap);
-			if(x!=null){
-				//ask how to return
-				return x;
-			}else 
-				return null;
-		}else
-			return null;	
-	}*/
 }
