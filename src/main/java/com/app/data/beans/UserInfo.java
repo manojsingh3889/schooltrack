@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="User_info")
+@Table(name="user_info")
 public class UserInfo  implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +37,16 @@ public class UserInfo  implements java.io.Serializable {
 		this.firstname = firstname;
 		this.lastname = lastname;
 	}
+	
+
+	public UserInfo(Integer userid, String firstname, String lastname, Role role) {
+		this.userid = userid;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.role = role;
+	}
+
+
 
 	public UserInfo() {
 	}

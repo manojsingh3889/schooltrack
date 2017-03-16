@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="User_login")
+@Table(name="user_login")
 public class UserLogin  implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;

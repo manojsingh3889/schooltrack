@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 
@@ -37,6 +40,7 @@ public class Role  implements java.io.Serializable {
 	@Column(name="description")
 	private String description;
 
+	@JsonIgnore
 	@ElementCollection (fetch=FetchType.EAGER)
 	@CollectionTable(name="role_based_worker" , joinColumns=@JoinColumn(name="role_id"))
 	@MapKeyColumn(name="task")

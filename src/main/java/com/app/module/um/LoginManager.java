@@ -1,8 +1,5 @@
 package com.app.module.um;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +7,10 @@ import com.app.api.requestbean.ChangePasswordBean;
 import com.app.api.requestbean.LoginBean;
 import com.app.api.requestbean.RegisterBean;
 import com.app.data.beans.Role;
-import com.app.data.beans.StudentInfo;
 import com.app.data.beans.UserInfo;
 import com.app.data.beans.UserLogin;
-import com.app.data.beans.UserStudentMapping;
 import com.app.data.service.ParentService;
 import com.app.data.service.UserService;
-import com.app.role.task.RoleBasedTask;
 import com.app.role.task.RoleBeanBuilder;
 import com.app.role.task.WorkerRepo;
 import com.app.utility.Utility;
@@ -33,6 +27,9 @@ public class LoginManager {
 	@Autowired
 	UserService userService;
 	
+	@Autowired
+	WorkerRepo workerRepo;
+	
 	public UserInfo authenticateUser(LoginBean loginBean){
 		if(!Utility.isEmpty(loginBean.getEmail()) || !Utility.isEmpty(loginBean.getPassword())){
 			UserLogin userLogin = loginService.getUserLoginObject(loginBean);
@@ -43,9 +40,10 @@ public class LoginManager {
 					Role role = userInfo.getRole();
 					
 					try {
-						String workerName = WorkerRepo.WORKER_PACKAGE+"."+role.getTaskWorkerMaps().get(RoleBeanBuilder.class.getSimpleName());
-						RoleBeanBuilder beanBuilder = WorkerRepo.getWorker(workerName);
-						System.err.println(beanBuilder);
+						String workerName = role.getTaskWorkerMaps().get(RoleBeanBuilder.class.getSimpleName());
+						RoleBeanBuilder beanBuilder = workerRepo.getWorker(workerName);
+						userInfo = beanBuilder.build(userInfo);
+//						System.err.println(beanBuilder);
 					} catch (ClassNotFoundException e) {
 						e.printStackTrace();
 					}

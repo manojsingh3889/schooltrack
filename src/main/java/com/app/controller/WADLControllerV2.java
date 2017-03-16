@@ -60,7 +60,7 @@ public class WADLControllerV2 {
              
             Object object = handlerMethod.getBean();
             Object bean = webApplicationContext.getBean(object.toString());
-             
+
             boolean isRestContoller = bean.getClass().isAnnotationPresent(RestController.class);
             if(!isRestContoller) {
                 continue;
