@@ -18,8 +18,7 @@ public class ParentController {
 	
 	//ask how to send data in body
 	@RequestMapping(method=RequestMethod.POST,value="/addstudent")
-	public ResponseEntity addStudent(@RequestBody String referenceNumber
-			,@RequestBody Integer userId){
+	public ResponseEntity addStudent(@RequestBody String referenceNumber,@RequestBody Integer userId){
 		return new ResponseEntity(parentManager.addStudent(referenceNumber,userId),HttpStatus.OK);
 	}
 	
@@ -54,8 +53,7 @@ public class ParentController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/updateStop")
-	public ResponseEntity setStop(@PathVariable("studentId") Integer studentId,
-			@PathVariable("stopId") Integer stopId){
+	public ResponseEntity setStop(@RequestBody Integer studentId,@RequestBody Integer stopId){
 		return new ResponseEntity(parentManager.setStop(studentId,stopId),HttpStatus.OK);
 	}
 	

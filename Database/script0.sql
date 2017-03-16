@@ -49,8 +49,6 @@ DROP TABLE IF EXISTS `handler_info`;
 
 CREATE TABLE `handler_info` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
   `class` varchar(10) DEFAULT NULL,
   `subject` varchar(100) DEFAULT NULL,
   `photo` varchar(100) DEFAULT NULL,
@@ -63,7 +61,7 @@ CREATE TABLE `handler_info` (
 
 /*Data for the table `handler_info` */
 
-insert  into `handler_info`(`id`,`firstname`,`lastname`,`class`,`subject`,`photo`,`designation`,`school_id`,`user_id`,`route_id`) values (1,'arpit','porwal','10','Maths','/abc.jgep','teacher',1,1,1);
+insert  into `handler_info`(`id`,`class`,`subject`,`photo`,`designation`,`school_id`,`user_id`,`route_id`) values (1,'10','Maths','/abc.jgep','teacher',1,1,1);
 
 /*Table structure for table `priviledge` */
 
@@ -228,7 +226,8 @@ CREATE TABLE `student_info` (
   `school_id` int(11) NOT NULL,
   `referencenumber` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `referencenumber` (`referencenumber`)
+  UNIQUE KEY `referencenumber` (`referencenumber`),
+  UNIQUE KEY `school_id` (`registrationnumber`,`school_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_info` */
@@ -238,10 +237,12 @@ CREATE TABLE `student_info` (
 DROP TABLE IF EXISTS `student_reference`;
 
 CREATE TABLE `student_reference` (
-  `reference_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `referencenumber` varchar(255) NOT NULL,
   `student_id` int(11) NOT NULL,
-  PRIMARY KEY (`reference_id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `referencenumber` (`referencenumber`),
+  UNIQUE KEY `student_id` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_reference` */

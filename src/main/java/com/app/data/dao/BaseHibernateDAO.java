@@ -42,6 +42,17 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 			throw re;
 		}
 	}
+	
+	public void saveOrUpdate(T transientInstance) {
+		log.info("saving or updating "+type.getSimpleName()+" instance");
+		try {
+			getSession().saveOrUpdate(transientInstance);
+			log.info("save or update successful");
+		} catch (RuntimeException re) {
+			log.error("save or update failed", re);
+			throw re;
+		}
+	}
 
 	public void delete(T persistentInstance) {
 		log.info("deleting "+type.getSimpleName()+" instance");
@@ -78,6 +89,21 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
+			throw re;
+		}
+	}    
+	
+	public T findUniqueByExample(T instance) {
+		log.info("finding unique"+type.getSimpleName()+" instance by example");
+		try {
+			T result = (T) getSession()
+					.createCriteria(type)
+					.add( create(instance) )
+					.uniqueResult();
+			log.info("find by example successful");
+			return result;
+		} catch (RuntimeException re) {
+			log.error("find unique by example failed", re);
 			throw re;
 		}
 	}    

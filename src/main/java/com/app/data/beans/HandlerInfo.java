@@ -20,13 +20,7 @@ public class HandlerInfo {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private Integer id;
-	
-	@Column(name="firstname")
-	private String firstname;
-	
-	@Column(name="lastname")
-	private String lastname;
-	
+
 	@Column(name="class")
 	private String handlerclass;
 	
@@ -54,14 +48,11 @@ public class HandlerInfo {
 	public HandlerInfo() {
 	}
 
-	public HandlerInfo(Integer id, String firstname, String lastname,
-			String handlerclass, String handlersubject, String photo,
+	public HandlerInfo(Integer id, String handlerclass, String handlersubject, String photo,
 			String designation, SchoolInfo school, UserInfo user,
 			RouteInfo route) {
 		super();
 		this.id = id;
-		this.firstname = firstname;
-		this.lastname = lastname;
 		this.handlerclass = handlerclass;
 		this.handlersubject = handlersubject;
 		this.photo = photo;
@@ -77,22 +68,6 @@ public class HandlerInfo {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
 	}
 
 	public String getHandlerclass() {
@@ -153,8 +128,7 @@ public class HandlerInfo {
 
 	@Override
 	public String toString() {
-		return "HandlerInfo [id=" + id + ", firstname=" + firstname
-				+ ", lastname=" + lastname + ", handlerclass=" + handlerclass
+		return "HandlerInfo [id=" + id + ", handlerclass=" + handlerclass
 				+ ", handlersubject=" + handlersubject + ", photo=" + photo
 				+ ", designation=" + designation + ", school=" + school
 				+ ", user=" + user + ", route=" + route + "]";
