@@ -18,8 +18,8 @@ public class HandlerController {
 	HandlerManager handlerManager;
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/getStudents/{routeId}/{schoolId}")
-	public ResponseEntity getStudents(@PathVariable Integer routeId, @PathVariable Integer studentId){
-		return new ResponseEntity(handlerManager.getStudents(routeId,studentId), HttpStatus.OK);
+	public ResponseEntity getStudents(@PathVariable Integer routeId, @PathVariable Integer schoolId){
+		return new ResponseEntity(handlerManager.getStudents(routeId,schoolId), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/getAllStops/{routeId}")

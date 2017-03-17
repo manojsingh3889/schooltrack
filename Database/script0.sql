@@ -140,14 +140,14 @@ CREATE TABLE `route_info` (
   `busplatenumber` varchar(100) DEFAULT NULL,
   `seatsleft` int(10) DEFAULT NULL,
   `school_id` int(11) NOT NULL,
-  `tripstatus` enum('Started','Stopped','Broken Down') NOT NULL DEFAULT 'Stopped',
+  `tripstatus` enum('STARTED','STOPPED','BROKEN DOWN') NOT NULL DEFAULT 'STOPPED',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_school_route` (`routenumber`,`school_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `route_info` */
 
-insert  into `route_info`(`id`,`routenumber`,`seatcapacity`,`routearea`,`busplatenumber`,`seatsleft`,`school_id`,`tripstatus`) values (1,'2',40,'pitampura','DL4C3449',5,1,'Stopped');
+insert  into `route_info`(`id`,`routenumber`,`seatcapacity`,`routearea`,`busplatenumber`,`seatsleft`,`school_id`,`tripstatus`) values (1,'2',40,'pitampura','DL4C3449',5,1,'STOPPED');
 
 /*Table structure for table `route_tracking` */
 
@@ -191,9 +191,11 @@ CREATE TABLE `stop_info` (
   `longitude` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `stop_info` */
+
+insert  into `stop_info`(`id`,`lattitude`,`longitude`,`address`) values (1,'3','40','rohini');
 
 /*Table structure for table `stop_route` */
 
@@ -228,9 +230,11 @@ CREATE TABLE `student_info` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `referencenumber` (`referencenumber`),
   UNIQUE KEY `school_id` (`registrationnumber`,`school_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_info` */
+
+insert  into `student_info`(`id`,`firstname`,`lastname`,`registrationnumber`,`studentclass`,`studentsection`,`photo`,`route_id`,`stop_id`,`school_id`,`referencenumber`) values (2,'porwal','arpit','1245024','10','A',NULL,1,NULL,1,'asdfr1432njsdfk4');
 
 /*Table structure for table `student_reference` */
 
@@ -243,9 +247,11 @@ CREATE TABLE `student_reference` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `referencenumber` (`referencenumber`),
   UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student_reference` */
+
+insert  into `student_reference`(`id`,`referencenumber`,`student_id`) values (2,'asdfr1432njsdfk4',2);
 
 /*Table structure for table `user_info` */
 
@@ -257,11 +263,11 @@ CREATE TABLE `user_info` (
   `lastname` varchar(255) NOT NULL,
   `role_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_info` */
 
-insert  into `user_info`(`user_id`,`firstname`,`lastname`,`role_id`) values (1,'manoj','singh',NULL),(2,'test','s',NULL),(3,'p','d','8');
+insert  into `user_info`(`user_id`,`firstname`,`lastname`,`role_id`) values (1,'manoj','singh',NULL),(2,'test','s',NULL),(3,'p','d','8'),(4,'arpit','porwal',NULL);
 
 /*Table structure for table `user_login` */
 
@@ -275,11 +281,11 @@ CREATE TABLE `user_login` (
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`login_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `user_login` */
 
-insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values (1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1),(2,'test@s.com','61d5217883277b96b5d105aa5f8a4b7b','9fca2264c9a1e7b3e9f135185444b4ce',2),(3,'parent@test.com','e862eb9582dfd22e93bed8c8e92e8ae4','ad6531f12f0891c01c49523e327f73f6',3);
+insert  into `user_login`(`login_id`,`email`,`passwordhash`,`passwordsalt`,`user_id`) values (1,'manoj@singh.com','4998cc240c8b00b180045437198382c6','ecc49d01d102a9bbbde92fc950769704',1),(2,'test@s.com','61d5217883277b96b5d105aa5f8a4b7b','9fca2264c9a1e7b3e9f135185444b4ce',2),(3,'parent@test.com','e862eb9582dfd22e93bed8c8e92e8ae4','ad6531f12f0891c01c49523e327f73f6',3),(4,'asdasd','f9b36766e5e854c2526dfabf8b4ade1f','66685345fcfeb6588ab4b054a9bb224c',4);
 
 /*Table structure for table `user_student` */
 

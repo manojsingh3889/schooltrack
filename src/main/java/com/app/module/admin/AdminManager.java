@@ -6,7 +6,9 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.api.requestbean.CreateRouteBean;
 import com.app.api.requestbean.CreateStopBean;
+import com.app.api.requestbean.CreateStudentBean;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.RouteTracking;
 import com.app.data.beans.SchoolInfo;
@@ -179,9 +181,9 @@ public class AdminManager {
 			return null;
 	}
 	
-	public RouteInfo createRoute(RouteInfo info){
-		if(!Utility.isEmpty(info.getRoutenumber()) && info.getSchool()!=null && !Utility.isEmpty(info.getRoutearea())){
-			RouteInfo routeInfo = adminService.createRoute(info);
+	public RouteInfo createRoute(CreateRouteBean bean){
+		if(!Utility.isEmpty(bean.getRoutenumber()) && bean.getSchoolId()!=null && !Utility.isEmpty(bean.getRoutearea())){
+			RouteInfo routeInfo = adminService.createRoute(bean);
 			if(routeInfo!=null){
 				return routeInfo;
 			}else 
@@ -190,11 +192,11 @@ public class AdminManager {
 			return null;
 	}
 	
-	public StudentInfo createStudent(StudentInfo info){
-		if(!Utility.isEmpty(info.getRegistrationnumber()) && info.getSchool()!=null && !Utility.isEmpty(info.getReferencenumber())
-				&& !Utility.isEmpty(info.getFirstname()) && !Utility.isEmpty(info.getStudentclass()) &&
-				!Utility.isEmpty(info.getStudentsection())){
-			StudentInfo studentInfo = adminService.createStudent(info);
+	public StudentInfo createStudent(CreateStudentBean bean){
+		if(!Utility.isEmpty(bean.getRegistrationnumber()) && bean.getSchoolId()!=null && bean.getRouteId()!=null && !Utility.isEmpty(bean.getReferencenumber())
+				&& !Utility.isEmpty(bean.getFirstname()) && !Utility.isEmpty(bean.getStudentclass()) &&
+				!Utility.isEmpty(bean.getStudentsection())){
+			StudentInfo studentInfo = adminService.createStudent(bean);
 			if(studentInfo!=null){
 				return studentInfo;
 			}else 

@@ -5,13 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.api.requestbean.CreateRouteBean;
 import com.app.api.requestbean.CreateStopBean;
+import com.app.api.requestbean.CreateStudentBean;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.SchoolInfo;
 import com.app.data.beans.StopInfo;
 import com.app.data.beans.StudentInfo;
 import com.app.data.beans.StudentReference;
 import com.app.data.dao.RouteDAO;
+import com.app.data.dao.SchoolDAO;
 import com.app.data.dao.StopDAO;
 import com.app.data.dao.StudentDAO;
 import com.app.data.dao.StudentReferenceDAO;
@@ -27,6 +30,9 @@ public class AdminService {
 
 	@Autowired
 	StudentDAO studentDAO;
+
+	@Autowired
+	SchoolDAO schoolDAO;
 
 	@Autowired
 	StudentReferenceDAO studentReferenceDAO;
@@ -55,41 +61,64 @@ public class AdminService {
 			return null;
 	}
 
-	public RouteInfo createRoute(RouteInfo newRouteInfo){
-		RouteInfo info = new RouteInfo();
-		info.setRoutenumber(newRouteInfo.getRoutenumber());
-		info.setRoutearea(newRouteInfo.getRoutearea());
-		info.setSchool(newRouteInfo.getSchool());
-		List<RouteInfo> routeInfoList = routeDAO.findByExample(info);
-		if(routeInfoList==null){
-			routeDAO.save(newRouteInfo);
-			return newRouteInfo;
-		}else
-			return null;
-	}
-
-	//ask how to save two things else revert
-	public StudentInfo createStudent(StudentInfo newStudentInfo){
-		StudentReference newstudentReference = new StudentReference();
-		newstudentReference.setReferencenumber(newStudentInfo.getReferencenumber());
-		newstudentReference.setStudent(newStudentInfo);
-		StudentReference reference = studentReferenceDAO.findUniqueByExample(newstudentReference);
-		if(reference==null){
-			StudentInfo info = new StudentInfo();
-			info.setReferencenumber(newStudentInfo.getReferencenumber());
-			info.setRegistrationnumber(newStudentInfo.getRegistrationnumber());
-			info.setSchool(newStudentInfo.getSchool());
-			StudentInfo studentInfo = studentDAO.findUniqueByExample(info);
-			if(studentInfo==null){
-				studentDAO.save(newStudentInfo);
-				studentReferenceDAO.save(newstudentReference);
-				return newStudentInfo;
+	public RouteInfo createRoute(CreateRouteBean bean){
+		SchoolInfo schoolInfo = schoolDAO.findById(bean.getSchoolId());
+		if(schoolInfo!=null){
+			RouteInfo instance = new RouteInfo();
+			instance.setRoutenumber(bean.getRoutenumber());
+			instance.setSchool(schoolInfo);
+			RouteInfo routeInfo = routeDAO.findUniqueByExample(instance);
+			if(routeInfo==null){
+				RouteInfo info = new RouteInfo();
+				info.setRoutenumber(bean.getRoutenumber());
+				info.setSeatcapacity(bean.getSeatcapacity());
+				info.setRoutearea(bean.getRoutearea());
+				info.setBusplatenumber(bean.getBusplatenumber());
+				info.setSeatsleft(bean.getSeatsleft());
+				info.setSchool(schoolInfo);
+				//check how to send default
+				info.setTripstatus("STOPPED");
+				routeDAO.save(info);
+				return info;
 			}else
 				return null;
 		}else
 			return null;
 	}
-	
+
+	//ask how to save two things else revert
+	public StudentInfo createStudent(CreateStudentBean bean){
+		RouteInfo routeInfo = routeDAO.findById(bean.getRouteId());
+		SchoolInfo schoolInfo = schoolDAO.findById(bean.getSchoolId());
+		if(routeInfo!=null && schoolInfo!=null){
+			StudentReference reference = studentReferenceDAO.findUniqueByProperty("referencenumber", bean.getReferencenumber());
+			StudentInfo instance = new StudentInfo();
+			instance.setRegistrationnumber(bean.getRegistrationnumber());
+			instance.setSchool(schoolInfo);
+			StudentInfo info = studentDAO.findUniqueByExample(instance);
+			if(reference==null && info==null){
+				StudentInfo studentInfo = new StudentInfo();
+				studentInfo.setFirstname(bean.getFirstname());
+				studentInfo.setLastname(bean.getLastname());
+				studentInfo.setRegistrationnumber(bean.getRegistrationnumber());
+				studentInfo.setStudentclass(bean.getStudentclass());
+				studentInfo.setStudentsection(bean.getStudentsection());
+				studentInfo.setPhoto(bean.getPhoto());
+				studentInfo.setRoute(routeInfo);
+				studentInfo.setSchool(schoolInfo);
+				studentInfo.setReferencenumber(bean.getReferencenumber());
+				studentDAO.save(studentInfo);
+				StudentReference studentReference = new StudentReference();
+				studentReference.setReferencenumber(bean.getReferencenumber());
+				studentReference.setStudent(studentInfo);
+				studentReferenceDAO.save(studentReference);
+				return info;
+			}else
+				return null;
+		}else
+			return null;
+	}
+
 	//ask wht to return on deletes
 	/*public void deleteStudent(StudentInfo info){
 		StudentInfo studentInfo = studentDAO.findUniqueByExample(info);

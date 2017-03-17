@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.api.requestbean.CreateRouteBean;
 import com.app.api.requestbean.CreateStopBean;
+import com.app.api.requestbean.CreateStudentBean;
 import com.app.data.beans.RouteInfo;
 import com.app.data.beans.StudentInfo;
 
@@ -21,8 +23,8 @@ public class AdminController {
 	AdminManager adminManager;
 	
 	@RequestMapping(method=RequestMethod.GET, value = "/getStudents/{routeId}/{schoolId}")
-	public ResponseEntity getStudents(@PathVariable Integer routeId, @PathVariable Integer studentId){
-		return new ResponseEntity(adminManager.getStudents(routeId,studentId), HttpStatus.OK);
+	public ResponseEntity getStudents(@PathVariable Integer routeId, @PathVariable Integer schoolId){
+		return new ResponseEntity(adminManager.getStudents(routeId,schoolId), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,value="/getStudentInfo/{studentId}")
@@ -76,13 +78,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/createRoute")
-	public ResponseEntity createRoute(@RequestBody RouteInfo routeInfo){
-		return new ResponseEntity(adminManager.createRoute(routeInfo),HttpStatus.OK);
+	public ResponseEntity createRoute(@RequestBody CreateRouteBean bean){
+		return new ResponseEntity(adminManager.createRoute(bean),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/createStudent")
-	public ResponseEntity createStudent(@RequestBody StudentInfo studentInfo){
-		return new ResponseEntity(adminManager.createStudent(studentInfo),HttpStatus.OK);
+	public ResponseEntity createStudent(@RequestBody CreateStudentBean bean){
+		return new ResponseEntity(adminManager.createStudent(bean),HttpStatus.OK);
 	}
 	
 	/*@RequestMapping(method=RequestMethod.POST,value="/deleteStudent")

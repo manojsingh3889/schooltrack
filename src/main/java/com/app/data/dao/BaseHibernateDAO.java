@@ -96,10 +96,7 @@ public abstract class BaseHibernateDAO<T> implements IBaseHibernateDAO {
 	public T findUniqueByExample(T instance) {
 		log.info("finding unique"+type.getSimpleName()+" instance by example");
 		try {
-			T result = (T) getSession()
-					.createCriteria(type)
-					.add( create(instance) )
-					.uniqueResult();
+			T result = (T) getSession().createCriteria(type).add( create(instance) ).uniqueResult();
 			log.info("find by example successful");
 			return result;
 		} catch (RuntimeException re) {

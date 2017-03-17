@@ -9,7 +9,7 @@
 		<!-- this property is commented to keep db url decoupled.. set system variable with name "dbconnecturl"
 		for e.g. on linux shell " export dbconnecturl=jdbc:mysql://localhost:3306/practise"
 		in wildfly/jboss create environment variable in there settings key:dbconnecturl ,value:jdbc:mysql://localhost:3306/practise -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/practise</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/stdummy</property>
 		
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">root</property>
@@ -25,6 +25,9 @@
 		<mapping class="com.app.data.beans.UserLogin"/>
 		<mapping class="com.app.data.beans.UserStudentMapping"/>
 		<mapping class="com.app.data.beans.StudentInfo"/>
+		<mapping class="com.app.data.beans.HandlerInfo"/>
+		<mapping class="com.app.data.beans.ParentInfo"/>
+		<mapping class="com.app.data.beans.StudentReference"/>
 		
 		<mapping class="com.app.data.beans.RouteInfo"/>
 		<mapping class="com.app.data.beans.RouteTracking"/>
